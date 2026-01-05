@@ -5,165 +5,177 @@ const featuredWorks = [
     title: "霧の河",
     location: "横浜",
     year: "2025",
-    tag: "Monochrome",
-    tone: "linear-gradient(135deg, #e7e4db, #cfd5cf)",
+    cat: "Monochrome",
+    color: "#a8c0ff",
   },
   {
     title: "午後の余白",
     location: "代官山",
     year: "2024",
-    tag: "Portrait",
-    tone: "linear-gradient(135deg, #efe7dd, #d8cdbf)",
+    cat: "Portrait",
+    color: "#fbc2eb",
   },
   {
     title: "境界線",
     location: "竹芝",
     year: "2025",
-    tag: "Architecture",
-    tone: "linear-gradient(135deg, #dfe6e1, #c6d0cc)",
-  },
-  {
-    title: "雨の標本",
-    location: "神田",
-    year: "2023",
-    tag: "Series",
-    tone: "linear-gradient(135deg, #ece9e2, #d8d4cb)",
+    cat: "Architecture",
+    color: "#e0c3fc",
   },
 ];
 
 const updates = [
   {
     date: "2026.01.03",
+    cat: "お知らせ",
     title: "プレス素材の整理と命名規則を更新しました。",
   },
   {
     date: "2025.12.18",
+    cat: "作品情報",
     title: "作品一覧に2025年展示の記録を追加しました。",
   },
   {
     date: "2025.11.28",
+    cat: "お知らせ",
     title: "問い合わせ窓口の受付時間を調整しました。",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="container content-box">
-      <section className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">Photo Archive</p>
-          <h1>GLASS KEY 写真展アーカイブ</h1>
-          <p>
-            都市の写真展を記録するアーカイブサイトです。作品紹介、更新履歴、
-            プレス向け素材をまとめて公開しています。
+    <>
+      <div className="hero-section">
+        <div className="container hero-content">
+          <h1 className="hero-title">記録という、美学。</h1>
+          <p className="hero-desc">
+            GLASS KEY Photo Archive は、都市の瞬間を永遠に留めるための
+            写真展アーカイブプロジェクトです。
           </p>
-          <div className="hero-actions">
-            <Link className="button" href="/works">
-              作品一覧を見る
+          <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            <Link href="/works" className="btn">
+              View Works
             </Link>
-            <Link className="button-outline" href="/press">
-              プレス素材へ
+            <Link href="/contact" className="btn-outline">
+              Contact Us
             </Link>
           </div>
         </div>
-        <div className="hero-media" aria-hidden="true" />
-      </section>
+      </div>
 
       <section className="section">
-        <div className="section-head">
-          <div>
-            <h2 className="section-title">最新アーカイブ</h2>
-            <p className="section-sub">
-              会場別に整理した作品記録。公開情報のみ掲載しています。
-            </p>
+        <div className="container">
+          <div className="section-head">
+            <h2 className="section-title">News</h2>
+            <p className="section-sub">最新のお知らせと更新情報</p>
           </div>
-          <Link className="button-outline" href="/works">
-            すべての作品
-          </Link>
-        </div>
-        <div className="grid grid-2">
-          {featuredWorks.map((work) => (
-            <article key={work.title} className="card work-card" data-tag={work.tag}>
-              <div className="work-media" style={{ backgroundImage: work.tone }} />
-              <div className="work-body">
-                <span className="tag">{work.tag}</span>
-                <h3>{work.title}</h3>
-                <p className="work-meta">
-                  {work.location} / {work.year}
-                </p>
+          <div className="news-list">
+            {updates.map((item, i) => (
+              <div key={i} className="news-item">
+                <span className="news-date">{item.date}</span>
+                <div className="news-content">
+                  <Link href="#" className="news-title">
+                    {item.title}
+                  </Link>
+                </div>
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section-head">
-          <div>
-            <h2 className="section-title">アーカイブ概要</h2>
-            <p className="section-sub">
-              掲載情報は展示会公式記録に限定しています。掲載内容の修正や削除は
-              お問い合わせフォームからご連絡ください。
-            </p>
+            ))}
           </div>
-        </div>
-        <div className="two-col">
-          <div className="card">
-            <h3>運用方針</h3>
-            <p className="muted">
-              記録の正確性と再現性を優先し、作品ごとの公開範囲を明示しています。
-              来場者の個人情報や非公開資料は掲載しません。
-            </p>
-          </div>
-          <div className="card">
-            <h3>更新スケジュール</h3>
-            <p className="muted">
-              展示終了後30日以内にアーカイブへ反映します。緊急の差し替えは
-              Changelog に記録します。
-            </p>
+          <div style={{ textAlign: "right", marginTop: "20px", maxWidth: "900px", marginInline: "auto" }}>
+            <Link href="/changelog" style={{ fontSize: "14px", fontWeight: "bold" }}>
+              一覧を見る &rarr;
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-head">
-          <div>
-            <h2 className="section-title">最新更新</h2>
+      <section className="section section-gray">
+        <div className="container">
+          <div className="section-head">
+            <h2 className="section-title">Works</h2>
             <p className="section-sub">
-              更新内容はすべて公開ログとして残します。
+              主要な展示記録とアーカイブ作品
             </p>
           </div>
-          <Link className="button-outline" href="/changelog">
-            変更履歴を開く
-          </Link>
+          <div className="grid grid-3">
+            {featuredWorks.map((work, i) => (
+              <div key={i} className="work-card">
+                <div
+                  className="work-img"
+                  style={{
+                    background: `linear-gradient(135deg, ${work.color} 0%, #ffffff 100%)`,
+                  }}
+                />
+                <div className="work-body">
+                  <span className="work-cat">{work.cat}</span>
+                  <h3 className="work-title">{work.title}</h3>
+                  <p className="work-meta">
+                    {work.location} / {work.year}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <Link href="/works" className="btn-outline">
+              すべての作品を見る
+            </Link>
+          </div>
         </div>
-        <div className="list">
-          {updates.map((item) => (
-            <div key={item.date} className="list-item" data-log={item.date}>
-              <strong>{item.title}</strong>
-              <span>{item.date}</span>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <h2 className="section-title">About Archive</h2>
+            <p className="section-sub">GLASS KEYについて</p>
+          </div>
+          <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center" }}>
+            <div>
+              <h3 style={{ fontSize: "24px", marginBottom: "20px", fontFamily: "serif" }}>
+                都市の記憶を<br />
+                未来へ繋ぐ。
+              </h3>
+              <p style={{ marginBottom: "20px", color: "#666" }}>
+                私たちは、急速に変化する都市の風景を写真という媒体を通じて記録・保存しています。
+                展示会ごとに発表される作品群は、その一瞬の光景を切り取った貴重な資料です。
+              </p>
+              <p style={{ color: "#666" }}>
+                本アーカイブでは、過去の展示記録を体系的に整理し、
+                閲覧可能な状態で保存することを目的としています。
+              </p>
             </div>
-          ))}
+            <div
+              style={{
+                height: "300px",
+                background: "#f0f0f0",
+                borderRadius: "8px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#aaa",
+                border: "1px solid #e0e0e0"
+              }}
+            >
+              Image Placeholder
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-head">
-          <div>
-            <h2 className="section-title">お問い合わせ</h2>
-            <p className="section-sub">
-              取材、素材利用、修正依頼はフォームまたはメールでご連絡ください。
-            </p>
-          </div>
-          <Link className="button" href="/contact">
-            フォームへ
+      <section className="section section-gray" style={{ textAlign: "center" }}>
+        <div className="container">
+          <h2 style={{ fontSize: "28px", marginBottom: "20px", fontFamily: "serif" }}>
+            お問い合わせ
+          </h2>
+          <p style={{ marginBottom: "30px", maxWidth: "600px", marginInline: "auto" }}>
+            作品の貸出、取材、その他のお問い合わせはこちらからお願いいたします。
+          </p>
+          <Link href="/contact" className="btn">
+            Contact Form
           </Link>
         </div>
-        <div className="notice">
-          本アーカイブは公開情報のみを掲載しています。内部資料や未公開の
-          画像データは提供していません。
-        </div>
       </section>
-    </div>
+    </>
   );
 }

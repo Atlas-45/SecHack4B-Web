@@ -28,9 +28,7 @@ export const metadata: Metadata = {
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/works", label: "Works" },
-  { href: "/changelog", label: "Changelog" },
-  { href: "/press", label: "Press Kit" },
-  { href: "/terms", label: "Terms" },
+  { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -42,60 +40,57 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
-        <div className="page-shell">
-          <header className="site-header">
-            <div className="top-bar">
-              <div className="container top-bar-inner">
-                <span>Archive / Tokyo</span>
-                <div className="top-bar-right">
-                  <span>更新: 2026.01.03</span>
-                  <form className="search" role="search" action="#">
-                    <input type="search" placeholder="Search" />
-                    <button type="submit">検索</button>
-                  </form>
+        <header className="site-header">
+          <div className="container header-inner">
+            <Link href="/" className="brand">
+              <span className="brand-title">GLASS KEY</span>
+              <span className="brand-sub">Photo Archive</span>
+            </Link>
+            <nav className="site-nav">
+              {navItems.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+
+        <main>{children}</main>
+
+        <footer className="site-footer">
+          <div className="container">
+            <div className="footer-top">
+              <div className="footer-col">
+                <h4>GLASS KEY</h4>
+                <p>
+                  都市の記憶を記録する。<br />
+                  写真展アーカイブと作品データベース。
+                </p>
+                <p>Tokyo, Japan</p>
+              </div>
+              <div className="footer-col">
+                <h4>Links</h4>
+                <div className="footer-links">
+                  <Link href="/works">Works</Link>
+                  <Link href="/press">Press Kit</Link>
+                  <Link href="/changelog">Changelog</Link>
+                  <Link href="/terms">Terms of Service</Link>
+                </div>
+              </div>
+              <div className="footer-col">
+                <h4>Contact</h4>
+                <p>info@glasskey.jp</p>
+                <div className="footer-links">
+                  <Link href="/contact">お問い合わせフォーム</Link>
                 </div>
               </div>
             </div>
-            <div className="nav-bar">
-              <div className="container header-inner">
-                <Link href="/" className="brand">
-                  <span className="brand-title">GLASS KEY</span>
-                  <span className="brand-sub">Photo Archive</span>
-                </Link>
-                <nav className="site-nav">
-                  {navItems.map((item) => (
-                    <Link key={item.href} href={item.href}>
-                      {item.label}
-                    </Link>
-                  ))}
-                </nav>
-              </div>
+            <div className="footer-bottom">
+              <p>&copy; 2026 GLASS KEY Photo Archive. All Rights Reserved.</p>
             </div>
-          </header>
-          <main className="site-main">{children}</main>
-          <footer className="site-footer">
-            <div className="container footer-inner">
-              <div>
-                <p className="footer-title">GLASS KEY Photo Archive</p>
-                <p className="muted">
-                  都市の写真展記録を丁寧にまとめたアーカイブ。掲載情報は公開範囲に
-                  限定しています。
-                </p>
-              </div>
-              <div className="footer-links">
-                <Link href="/works">Works</Link>
-                <Link href="/press">Press Kit</Link>
-                <Link href="/terms">Terms</Link>
-                <Link href="/contact">Contact</Link>
-              </div>
-              <div className="footer-meta">
-                <p>Tokyo / Yokohama</p>
-                <p>info@glasskey.jp</p>
-                <p className="muted">© 2026 GLASS KEY</p>
-              </div>
-            </div>
-          </footer>
-        </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
