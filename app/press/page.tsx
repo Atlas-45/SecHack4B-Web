@@ -25,7 +25,7 @@ const guidelines = [
 
 export default function PressPage() {
   return (
-    <div className="container content-box">
+    <div className="container">
       <header className="page-header">
         <h1>Press Kit</h1>
         <p>
@@ -34,7 +34,29 @@ export default function PressPage() {
         </p>
       </header>
 
-      <section className="table-list section">
+      <div
+        style={{
+          height: "250px",
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=1200&auto=format&fit=crop')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: "8px",
+          marginBottom: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#fff",
+          fontSize: "24px",
+          fontWeight: "bold",
+          fontFamily: "serif",
+          textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+        }}
+      >
+        Official Materials
+      </div>
+
+      <section className="table-list section" style={{ marginTop: 0 }}>
         {assets.map((asset) => (
           <article key={asset.title} className="table-row">
             <div>
@@ -59,7 +81,10 @@ export default function PressPage() {
         <div className="grid grid-2">
           {guidelines.map((item) => (
             <div key={item} className="card">
-              <p>{item}</p>
+              <p style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ color: "#0056b3", fontSize: "20px" }}>•</span>
+                {item}
+              </p>
             </div>
           ))}
         </div>

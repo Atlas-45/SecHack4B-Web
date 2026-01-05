@@ -4,7 +4,7 @@ const works = [
     location: "横浜",
     year: "2025",
     tag: "Monochrome",
-    tone: "linear-gradient(135deg, #e7e4db, #cfd5cf)",
+    image: "https://images.unsplash.com/photo-1617438817509-70e91ad264a5?q=80&w=600&auto=format&fit=crop",
     id: "GK-025",
   },
   {
@@ -12,7 +12,7 @@ const works = [
     location: "代官山",
     year: "2024",
     tag: "Portrait",
-    tone: "linear-gradient(135deg, #efe7dd, #d8cdbf)",
+    image: "https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=600&auto=format&fit=crop",
     id: "GK-018",
   },
   {
@@ -20,7 +20,7 @@ const works = [
     location: "竹芝",
     year: "2025",
     tag: "Architecture",
-    tone: "linear-gradient(135deg, #dfe6e1, #c6d0cc)",
+    image: "https://images.unsplash.com/photo-1486718448742-166222b70de0?q=80&w=600&auto=format&fit=crop",
     id: "GK-021",
   },
   {
@@ -28,7 +28,7 @@ const works = [
     location: "神田",
     year: "2023",
     tag: "Series",
-    tone: "linear-gradient(135deg, #ece9e2, #d8d4cb)",
+    image: "https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=600&auto=format&fit=crop",
     id: "GK-012",
   },
   {
@@ -36,7 +36,7 @@ const works = [
     location: "新木場",
     year: "2024",
     tag: "Industrial",
-    tone: "linear-gradient(135deg, #dfe2e2, #c8d0d6)",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop",
     id: "GK-019",
   },
   {
@@ -44,7 +44,7 @@ const works = [
     location: "根岸",
     year: "2022",
     tag: "Landscape",
-    tone: "linear-gradient(135deg, #efeae1, #d8d0c3)",
+    image: "https://images.unsplash.com/photo-1572096772718-d937082e6d6c?q=80&w=600&auto=format&fit=crop",
     id: "GK-009",
   },
   {
@@ -52,7 +52,7 @@ const works = [
     location: "天王洲",
     year: "2025",
     tag: "Architecture",
-    tone: "linear-gradient(135deg, #e2e6e0, #c9d2cf)",
+    image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=600&auto=format&fit=crop",
     id: "GK-026",
   },
   {
@@ -60,7 +60,7 @@ const works = [
     location: "上野",
     year: "2023",
     tag: "Portrait",
-    tone: "linear-gradient(135deg, #efe7dc, #d7cfc4)",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
     id: "GK-013",
   },
   {
@@ -68,7 +68,7 @@ const works = [
     location: "芝浦",
     year: "2024",
     tag: "Series",
-    tone: "linear-gradient(135deg, #e8ebe7, #ccd4d0)",
+    image: "https://images.unsplash.com/photo-1559628236-0708f5195048?q=80&w=600&auto=format&fit=crop",
     id: "GK-017",
   },
 ];
@@ -84,7 +84,7 @@ const tags = [
 
 export default function WorksPage() {
   return (
-    <div className="container content-box">
+    <div className="container">
       <header className="page-header">
         <h1>Works</h1>
         <p>
@@ -93,7 +93,7 @@ export default function WorksPage() {
         </p>
       </header>
 
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="badge-grid">
           {tags.map((tag) => (
             <span key={tag} className="tag" data-tag={tag}>
@@ -106,10 +106,10 @@ export default function WorksPage() {
       <section className="grid grid-3">
         {works.map((work) => (
           <article key={work.id} className="card work-card" data-id={work.id}>
-            <div className="work-media" style={{ backgroundImage: work.tone }} />
+            <div className="work-img" style={{ backgroundImage: `url(${work.image})` }} />
             <div className="work-body">
               <span className="tag">{work.tag}</span>
-              <h3>{work.title}</h3>
+              <h3 className="work-title" style={{ fontSize: "18px", marginTop: "10px" }}>{work.title}</h3>
               <p className="work-meta">
                 {work.location} / {work.year}
               </p>

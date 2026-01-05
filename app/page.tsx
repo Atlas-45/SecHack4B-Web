@@ -6,21 +6,21 @@ const featuredWorks = [
     location: "横浜",
     year: "2025",
     cat: "Monochrome",
-    color: "#a8c0ff",
+    image: "https://images.unsplash.com/photo-1617438817509-70e91ad264a5?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "午後の余白",
     location: "代官山",
     year: "2024",
     cat: "Portrait",
-    color: "#fbc2eb",
+    image: "https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "境界線",
     location: "竹芝",
     year: "2025",
     cat: "Architecture",
-    color: "#e0c3fc",
+    image: "https://images.unsplash.com/photo-1486718448742-166222b70de0?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -45,7 +45,13 @@ const updates = [
 export default function Home() {
   return (
     <>
-      <div className="hero-section">
+      <div
+        className="hero-section"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1920&auto=format&fit=crop')",
+        }}
+      >
         <div className="container hero-content">
           <h1 className="hero-title">記録という、美学。</h1>
           <p className="hero-desc">
@@ -103,7 +109,7 @@ export default function Home() {
                 <div
                   className="work-img"
                   style={{
-                    background: `linear-gradient(135deg, ${work.color} 0%, #ffffff 100%)`,
+                    backgroundImage: `url(${work.image})`,
                   }}
                 />
                 <div className="work-body">
@@ -130,7 +136,7 @@ export default function Home() {
             <h2 className="section-title">About Archive</h2>
             <p className="section-sub">GLASS KEYについて</p>
           </div>
-          <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center" }}>
+          <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center", gap: "40px" }}>
             <div>
               <h3 style={{ fontSize: "24px", marginBottom: "20px", fontFamily: "serif" }}>
                 都市の記憶を<br />
@@ -147,18 +153,14 @@ export default function Home() {
             </div>
             <div
               style={{
-                height: "300px",
-                background: "#f0f0f0",
+                height: "350px",
+                backgroundImage: "url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?q=80&w=1000&auto=format&fit=crop')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#aaa",
-                border: "1px solid #e0e0e0"
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
               }}
-            >
-              Image Placeholder
-            </div>
+            />
           </div>
         </div>
       </section>

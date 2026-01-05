@@ -128,7 +128,9 @@ img {
 .hero-section {
   position: relative;
   height: 600px;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070') center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #333; /* Fallback */
   display: flex;
   align-items: center;
   color: var(--white);
@@ -145,13 +147,50 @@ img {
   font-size: clamp(32px, 5vw, 56px);
   font-weight: 700;
   margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .hero-desc {
   font-size: 18px;
   margin-bottom: 40px;
-  opacity: 0.9;
+  opacity: 0.95;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Hero Buttons */
+.hero-section .btn {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 2px solid #ffffff;
+  padding: 12px 36px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hero-section .btn:hover {
+  background: #f2f2f2;
+  border-color: #f2f2f2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.hero-section .btn-outline {
+  border: 2px solid rgba(255,255,255,0.7);
+  color: #ffffff;
+  padding: 12px 36px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.hero-section .btn-outline:hover {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
 .btn {
@@ -462,15 +501,29 @@ img {
   background: var(--accent-hover);
 }
 
+.badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
 .tag {
   display: inline-block;
-  padding: 4px 10px;
-  background: #eee;
+  padding: 6px 14px;
+  background: #f0f0f0;
   color: #555;
   border-radius: 20px;
-  font-size: 12px;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  font-size: 13px;
+  margin-right: 0;
+  margin-bottom: 0;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.tag:hover {
+  background: #e0e0e0;
+  color: #333;
 }
 
 .notice {
