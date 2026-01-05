@@ -20,7 +20,7 @@ const works = [
     location: "竹芝",
     year: "2025",
     tag: "Architecture",
-    image: "https://images.unsplash.com/photo-1486718448742-166222b70de0?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=600&auto=format&fit=crop",
     id: "GK-021",
   },
   {
@@ -28,7 +28,7 @@ const works = [
     location: "神田",
     year: "2023",
     tag: "Series",
-    image: "https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=600&auto=format&fit=crop",
     id: "GK-012",
   },
   {
@@ -44,7 +44,7 @@ const works = [
     location: "根岸",
     year: "2022",
     tag: "Landscape",
-    image: "https://images.unsplash.com/photo-1572096772718-d937082e6d6c?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=600&auto=format&fit=crop",
     id: "GK-009",
   },
   {
@@ -68,7 +68,7 @@ const works = [
     location: "芝浦",
     year: "2024",
     tag: "Series",
-    image: "https://images.unsplash.com/photo-1559628236-0708f5195048?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1542931287-023b922fa89b?q=80&w=600&auto=format&fit=crop",
     id: "GK-017",
   },
 ];

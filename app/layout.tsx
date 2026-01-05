@@ -4,17 +4,17 @@ import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 
 const bodyFont = Noto_Sans_JP({
-  subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-sans",
   display: "swap",
+  preload: false,
 });
 
 const headingFont = Noto_Serif_JP({
-  subsets: ["latin"],
   weight: ["400", "600", "700"],
   variable: "--font-serif",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" data-scroll-behavior="smooth">
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
         <header className="site-header">
           <div className="container header-inner">

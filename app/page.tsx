@@ -20,7 +20,7 @@ const featuredWorks = [
     location: "竹芝",
     year: "2025",
     cat: "Architecture",
-    image: "https://images.unsplash.com/photo-1486718448742-166222b70de0?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
