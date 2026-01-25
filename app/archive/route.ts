@@ -3,6 +3,21 @@ import { readFile } from "fs/promises";
 import path from "path";
 
 const TEXT_EXTENSIONS = new Set([".txt", ".md", ".log", ".tree", ".ts", ".tsx", ".json"]);
+const TREE_CONTENT = `GLASS KEY Photo Archive - Internal Tree (excerpt)
+
+/
+|-- app/
+|   |-- core/
+|   |   |-- ArtKey.ts
+|   |-- press/
+|       |-- page.tsx
+|-- public/
+    |-- press/
+        |-- kit-alpha/
+        |-- kit-beta/
+        |-- kit-gamma/
+        |-- .tree
+`;
 
 export async function GET(request: NextRequest) {
   const rawPath = request.nextUrl.searchParams.get("path");
@@ -13,6 +28,15 @@ export async function GET(request: NextRequest) {
 
   const basePath = process.cwd();
   const normalizedPath = rawPath.replace(/\\/g, "/").replace(/^\/+/, "");
+
+  if (normalizedPath === "public/press/.tree") {
+    return new NextResponse(TREE_CONTENT, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Disposition": "inline; filename=\".tree\"",
+      },
+    });
+  }
   const puzzlePrefix = "public/press/../";
   const mappedPath = normalizedPath.startsWith(puzzlePrefix)
     ? normalizedPath.slice(puzzlePrefix.length)
