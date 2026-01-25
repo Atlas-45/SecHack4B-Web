@@ -1,23 +1,101 @@
 import Link from "next/link";
 
-const assets = [
+const pressKits = [
   {
-    title: "プレスキット（概要）",
-    desc: "展示概要、ディレクターコメント、ステートメント。",
-    href: "/press/press-kit.txt",
-    size: "1.2 MB",
+    id: "alpha",
+    title: "Press Kit A",
+    desc: "基本素材（標準パッケージ）",
+    code: "KIT-A",
+    files: [
+      {
+        title: "プレスキット",
+        desc: "展示概要、ステートメント、コンセプト。",
+        href: "/press/kit-alpha/press-kit.txt",
+        size: "1.2 MB",
+      },
+      {
+        title: "掲載クレジット",
+        desc: "作家名、会場、協力クレジット。",
+        href: "/press/kit-alpha/credits.txt",
+        size: "450 KB",
+      },
+      {
+        title: "画像リスト",
+        desc: "公開可能な画像の整理とファイル名一覧。",
+        href: "/press/kit-alpha/image-list.txt",
+        size: "820 KB",
+      },
+      {
+        title: "README",
+        desc: "内容と利用条件の簡易メモ。",
+        href: "/press/kit-alpha/README.txt",
+        size: "3 KB",
+      },
+    ],
   },
   {
-    title: "掲載クレジット",
-    desc: "作家名、会場、協力クレジットの一覧。",
-    href: "/press/credits.txt",
-    size: "450 KB",
+    id: "beta",
+    title: "Press Kit B",
+    desc: "拡張素材（サブカット中心）",
+    code: "KIT-B",
+    files: [
+      {
+        title: "プレスキット",
+        desc: "展示概要、ディレクターコメント。",
+        href: "/press/kit-beta/press-kit.txt",
+        size: "1.1 MB",
+      },
+      {
+        title: "掲載クレジット",
+        desc: "クレジット一覧（短縮版）。",
+        href: "/press/kit-beta/credits.txt",
+        size: "420 KB",
+      },
+      {
+        title: "画像リスト",
+        desc: "差し替え用のサブカット一覧。",
+        href: "/press/kit-beta/image-list.txt",
+        size: "780 KB",
+      },
+      {
+        title: "README",
+        desc: "内容と利用条件の簡易メモ。",
+        href: "/press/kit-beta/README.txt",
+        size: "3 KB",
+      },
+    ],
   },
   {
-    title: "画像リスト",
-    desc: "公開可能な画像の整理とファイル名一覧。",
-    href: "/press/image-list.txt",
-    size: "820 KB",
+    id: "gamma",
+    title: "Press Kit C",
+    desc: "アーカイブ向け（記録重視）",
+    code: "KIT-C",
+    files: [
+      {
+        title: "プレスキット",
+        desc: "展示概要、背景資料の簡易版。",
+        href: "/press/kit-gamma/press-kit.txt",
+        size: "1.0 MB",
+      },
+      {
+        title: "掲載クレジット",
+        desc: "関係者・協力者の一覧。",
+        href: "/press/kit-gamma/credits.txt",
+        size: "430 KB",
+      },
+      {
+        title: "画像リスト",
+        desc: "アーカイブ用のファイル名一覧。",
+        href: "/press/kit-gamma/image-list.txt",
+        size: "800 KB",
+      },
+      {
+        title: "README",
+        desc: "内容と利用条件の簡易メモ。",
+        href: "/press/kit-gamma/README.txt",
+        size: "4 KB",
+      },
+    ],
   },
 ];
 
@@ -62,21 +140,34 @@ export default function PressPage() {
       </div>
 
       <section className="section" style={{ paddingTop: 0, paddingBottom: "80px" }}>
-        <div style={{ display: "grid", gap: "30px" }}>
-          {assets.map((asset) => (
-            <article key={asset.title} className="table-row" style={{ padding: "35px", background: "var(--white)", border: "1px solid var(--border)", boxShadow: "0 5px 15px rgba(0,0,0,0.02)" }}>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: "20px", marginBottom: "8px", fontFamily: "var(--font-serif), serif" }}>{asset.title}</h3>
-                <p style={{ fontSize: "15px", color: "var(--text-light)" }}>{asset.desc}</p>
+        <div style={{ display: "grid", gap: "40px" }}>
+          {pressKits.map((kit) => (
+            <div key={kit.id} className="card" style={{ padding: "40px", border: "1px solid var(--border)", boxShadow: "0 5px 20px rgba(0,0,0,0.04)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "20px", marginBottom: "25px" }}>
+                <div>
+                  <h2 style={{ fontSize: "22px", marginBottom: "6px", fontFamily: "var(--font-serif), serif" }}>{kit.title}</h2>
+                  <p style={{ fontSize: "14px", color: "var(--text-light)" }}>{kit.desc}</p>
+                </div>
+                <span style={{ fontSize: "12px", color: "#999", letterSpacing: "0.2em" }}>{kit.code}</span>
               </div>
-              <div style={{ paddingInline: "40px", textAlign: "right", minWidth: "150px" }}>
-                <span style={{ display: "block", fontSize: "12px", color: "#999", fontFamily: "monospace", marginBottom: "4px" }}>SIZE: {asset.size}</span>
-                <span style={{ display: "block", fontSize: "12px", color: "#999" }}>Monthly Update</span>
+              <div className="table-list">
+                {kit.files.map((asset) => (
+                  <div key={asset.title} className="table-row" style={{ padding: "22px 25px" }}>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: "18px", marginBottom: "6px", fontFamily: "var(--font-serif), serif" }}>{asset.title}</h3>
+                      <p style={{ fontSize: "14px", color: "var(--text-light)" }}>{asset.desc}</p>
+                    </div>
+                    <div style={{ paddingInline: "30px", textAlign: "right", minWidth: "140px" }}>
+                      <span style={{ display: "block", fontSize: "12px", color: "#999", fontFamily: "monospace", marginBottom: "4px" }}>SIZE: {asset.size}</span>
+                      <span style={{ display: "block", fontSize: "12px", color: "#999" }}>Monthly Update</span>
+                    </div>
+                    <a className="button" href={asset.href} download style={{ minWidth: "140px", borderRadius: "0", background: "#333" }}>
+                      Download &darr;
+                    </a>
+                  </div>
+                ))}
               </div>
-              <a className="button" href={asset.href} download style={{ minWidth: "160px", borderRadius: "0", background: "#333" }}>
-                Download &darr;
-              </a>
-            </article>
+            </div>
           ))}
         </div>
       </section>
