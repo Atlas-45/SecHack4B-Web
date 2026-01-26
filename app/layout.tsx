@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: "GLASS KEY Photo Archive",
     template: "%s | GLASS KEY Photo Archive",
   },
-  description: "写真展アーカイブと作品紹介の公式サイト。",
+  description: "「██████」による作品を展示するアーカイブサイト。",
 };
 
 const navItems = [
@@ -64,10 +64,10 @@ export default function RootLayout({
               <div className="footer-col">
                 <h4>GLASS KEY</h4>
                 <p>
-                  都市の記憶を記録する。<br />
-                  写真展アーカイブと作品データベース。
+                  「██████」による<br />
+                  作品アーカイブ。
                 </p>
-                <p>Tokyo, Japan</p>
+                <p>██████, Japan</p>
               </div>
               <div className="footer-col">
                 <h4>Links</h4>
@@ -80,7 +80,7 @@ export default function RootLayout({
               </div>
               <div className="footer-col">
                 <h4>Contact</h4>
-                <p>info@glasskey.jp</p>
+                <p>██████@██████.██</p>
                 <div className="footer-links">
                   <Link href="/contact">お問い合わせフォーム</Link>
                 </div>

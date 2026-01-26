@@ -25,8 +25,8 @@ export default function WorksPage() {
       <header className="page-header" style={{ marginBottom: "60px", borderBottom: "none", textAlign: "center" }}>
         <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>Works</h1>
         <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--text-light)" }}>
-          都市の断片を記録した写真アーカイブ。
-          過去の展示作品から主要なシリーズを体系的に分類し、公開しています。
+          「██████」による作品アーカイブ。
+          現在公開が許可されている作品のみを掲載しています。
         </p>
       </header>
 

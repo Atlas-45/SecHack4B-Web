@@ -102,7 +102,7 @@ const pressKits = [
 const guidelines = [
   { title: "利用目的", text: "用途は報道・紹介目的に限ります。商業販売物への無断転載は固くお断りします。" },
   { title: "改変の禁止", text: "画像のトリミングや色味の変更は最小限でお願いします。作品の意図を損なわないよう配慮ください。" },
-  { title: "クレジット", text: "「© GLASS KEY / Writer Name」といった形式でのクレジット表記を必須としています。" },
+  { title: "クレジット", text: "「© GLASS KEY / ██████」といった形式でのクレジット表記を必須としています。" },
   { title: "事前確認", text: "大きなメディアでの掲載前には、事実確認のため必ず内容の校正をお願いしております。" },
 ];
 
@@ -112,8 +112,8 @@ export default function PressPage() {
       <header className="page-header" style={{ textAlign: "center", borderBottom: "none", marginBottom: "80px" }}>
         <h1 style={{ fontSize: "3rem", marginBottom: "20px", fontFamily: "var(--font-serif), serif" }}>Press Kit</h1>
         <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--text-light)" }}>
-          取材・掲載向けの公式素材とガイドライン。
-          ブランドの質を保つため、提供素材の適切な利用にご協力をお願いします。
+          取材・掲載向けの公式素材。
+          「██████」に関する情報は含まれていません。
         </p>
       </header>
 

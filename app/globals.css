@@ -169,10 +169,11 @@ img {
 }
 
 .hero-section .btn:hover {
-  background: #f2f2f2;
-  border-color: #f2f2f2;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  background: transparent;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  color: #ffffff;
 }
 
 .hero-section .btn-outline {

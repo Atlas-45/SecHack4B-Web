@@ -7,7 +7,7 @@ export default function ChangelogPage() {
       <header className="page-header" style={{ textAlign: "center", borderBottom: "none", marginBottom: "80px" }}>
         <h1 style={{ fontSize: "3rem", marginBottom: "20px", fontFamily: "var(--font-serif), serif" }}>Changelog</h1>
         <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--text-light)" }}>
-          プロジェクトの更新履歴と運営からのお知らせ。
+          アーカイブの更新履歴。
         </p>
       </header>
 

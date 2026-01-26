@@ -20,8 +20,7 @@ export default function Home() {
         <div className="container hero-content">
           <h1 className="hero-title">記録という、美学。</h1>
           <p className="hero-desc">
-            GLASS KEY Photo Archive は、都市の瞬間を永遠に留めるための
-            写真展アーカイブプロジェクトです。
+            「██████」による作品を展示するアーカイブサイトです。
           </p>
           <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
             <Link href="/works" className="btn">
@@ -38,7 +37,7 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <h2 className="section-title">News</h2>
-            <p className="section-sub">最新のお知らせと更新情報</p>
+            <p className="section-sub">最新のお知らせ</p>
           </div>
           <div className="news-list">
             {recentUpdates.map((item) => (
@@ -65,7 +64,7 @@ export default function Home() {
           <div className="section-head">
             <h2 className="section-title">Works</h2>
             <p className="section-sub">
-              主要な展示記録とアーカイブ作品
+              展示作品のアーカイブ
             </p>
           </div>
           <div className="grid grid-3">
@@ -104,16 +103,16 @@ export default function Home() {
           <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center", gap: "40px" }}>
             <div>
               <h3 style={{ fontSize: "24px", marginBottom: "20px", fontFamily: "serif" }}>
-                都市の記憶を<br />
-                未来へ繋ぐ。
+                ██████による<br />
+                作品群。
               </h3>
               <p style={{ marginBottom: "20px", color: "#666" }}>
-                私たちは、急速に変化する都市の風景を写真という媒体を通じて記録・保存しています。
-                展示会ごとに発表される作品群は、その一瞬の光景を切り取った貴重な資料です。
+                GLASS KEYは、「██████」による作品を収集・展示するプロジェクトです。
+                作者についての情報は██されています。
               </p>
               <p style={{ color: "#666" }}>
-                本アーカイブでは、過去の展示記録を体系的に整理し、
-                閲覧可能な状態で保存することを目的としています。
+                本アーカイブでは、これまでに発表された作品を
+                閲覧可能な形で保存・公開しています。
               </p>
             </div>
             <div
@@ -136,7 +135,7 @@ export default function Home() {
             お問い合わせ
           </h2>
           <p style={{ marginBottom: "30px", maxWidth: "600px", marginInline: "auto" }}>
-            作品の貸出、取材、その他のお問い合わせはこちらからお願いいたします。
+            展示に関するお問い合わせ、取材依頼などはこちらからお願いいたします。
           </p>
           <Link href="/contact" className="btn">
             Contact Form

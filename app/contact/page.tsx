@@ -4,8 +4,8 @@ export default function ContactPage() {
       <header className="page-header" style={{ textAlign: "center", borderBottom: "none", marginBottom: "60px" }}>
         <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>Contact</h1>
         <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--text-light)" }}>
-          制作依頼、作品の貸出、メディア掲載に関するお問い合わせを承っております。
-          通常、3営業日以内に担当者より折り返しご連絡いたします。
+          作品に関するお問い合わせを承っております。
+          ██営業日以内に担当者より折り返しご連絡いたします。
         </p>
       </header>
 
@@ -68,27 +68,27 @@ export default function ContactPage() {
                 <div style={{ display: "flex", gap: "15px" }}>
                   <span style={{ color: "var(--accent)", fontWeight: "bold" }}>OFFICE</span>
                   <div style={{ fontSize: "14px", color: "var(--text-light)" }}>
-                    東京都内（スタジオ・倉庫）<br />
+                    ██████（██████）<br />
                     ※一般公開はしておりません
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "15px" }}>
                   <span style={{ color: "var(--accent)", fontWeight: "bold" }}>EMAIL</span>
                   <div style={{ fontSize: "14px", color: "var(--text-light)" }}>
-                    info@glasskey.jp
+                    ██████@██████.██
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "15px" }}>
                   <span style={{ color: "var(--accent)", fontWeight: "bold" }}>HOURS</span>
                   <div style={{ fontSize: "14px", color: "var(--text-light)" }}>
-                    平日 10:00 - 17:00<br />
-                    （土日祝・年末年始を除く）
+                    ██:00 - ██:00<br />
+                    （██████を除く）
                   </div>
                 </div>
               </div>
               <div className="notice" style={{ marginTop: "30px", fontSize: "13px" }}>
-                <strong>至急のご連絡:</strong><br />
-                展示トラブルや報道関係の至急案件は、メール件名の冒頭に【至急】とご記載ください。
+                <strong>注意:</strong><br />
+                ██████に関するお問い合わせには回答いたしかねます。
               </div>
             </div>
           </div>
