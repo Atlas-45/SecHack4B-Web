@@ -70,6 +70,7 @@ export default function Home() {
           <div className="grid grid-3">
             {featuredWorks.map((work) => (
               <Link key={work.id} href={`/works/${work.id}`} className="work-card" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                {/* Glitch effect (disabled): className="work-img glitch" */}
                 <div
                   className="work-img"
                   style={{

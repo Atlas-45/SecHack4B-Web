@@ -69,7 +69,8 @@ export default function WorksPage() {
       <section className="grid grid-3">
         {filteredWorks.map((work) => (
           <Link href={`/works/${work.id}`} key={work.id} className="work-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="work-img" style={{ backgroundImage: `url(${work.image})`, height: "240px" }} />
+            {/* Glitch effect (disabled): className="work-img glitch" */}
+            <div className="work-img" style={{ backgroundImage: `url(${work.image})`, height: "240px", backgroundColor: work.id === "GK-000" ? "#000" : undefined }} />
             <div className="work-body">
               <span className="work-cat" style={{ fontSize: "11px", letterSpacing: "0.1em" }}>{work.tag}</span>
               <h3 className="work-title" style={{ fontSize: "20px", marginTop: "5px", marginBottom: "15px" }}>{work.title}</h3>

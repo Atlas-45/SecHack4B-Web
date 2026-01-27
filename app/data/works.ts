@@ -36,6 +36,15 @@ export const works = [
     description: "雨上がりの路上に残された痕跡をクローズアップで撮影。濡れたアスファルト、反射するネオン、水滴の輝きが、都市の記憶を標本のように閉じ込めている。",
   },
   {
+    title: "██████",
+    location: "██████",
+    year: "████",
+    tag: "██████",
+    image: "/void.jpg",
+    id: "GK-000",
+    description: "データが破損しています。",
+  },
+  {
     title: "光の搬送",
     location: "新木場",
     year: "2024",

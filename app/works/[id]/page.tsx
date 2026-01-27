@@ -53,18 +53,34 @@ export default async function WorkDetailPage({
         </div>
       </header>
 
-      <div
-        style={{
-          width: "100%",
-          aspectRatio: "16/9",
-          backgroundImage: `url(${work.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderRadius: "8px",
-          marginBottom: "60px",
-          boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
-        }}
-      />
+      {work.id === "GK-000" ? (
+        <img
+          src={work.image}
+          alt={work.title}
+          style={{
+            width: "100%",
+            aspectRatio: "16/9",
+            objectFit: "cover",
+            borderRadius: "8px",
+            marginBottom: "60px",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+            backgroundColor: "#000"
+          }}
+        />
+      ) : (
+        <div
+          style={{
+            width: "100%",
+            aspectRatio: "16/9",
+            backgroundImage: `url(${work.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderRadius: "8px",
+            marginBottom: "60px",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+          }}
+        />
+      )}
 
       <div className="two-col" style={{ alignItems: "start" }}>
         <div>
@@ -93,28 +109,54 @@ export default async function WorkDetailPage({
           <h3 style={{ fontSize: "18px", marginBottom: "20px", fontFamily: "var(--font-serif), serif" }}>
             Technical Data
           </h3>
-          <ul style={{ listStyle: "none", display: "grid", gap: "15px" }}>
-            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
-              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Camera</span>
-              <span>Leica M10-R</span>
-            </li>
-            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
-              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Lens</span>
-              <span>Summilux-M 35mm f/1.4</span>
-            </li>
-            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
-              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Simulation</span>
-              <span>Custom Monochrome</span>
-            </li>
-            <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
-              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Print</span>
-              <span>Gelatin Silver Print</span>
-            </li>
-             <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
-              <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Size</span>
-              <span>A2 (420 x 594 mm)</span>
-            </li>
-          </ul>
+          {work.id === "GK-000" ? (
+            <div>
+              <ul style={{ listStyle: "none", display: "grid", gap: "15px" }}>
+                <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                  <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Camera</span>
+                  <span>██████</span>
+                </li>
+                <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                  <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Lens</span>
+                  <span>██████</span>
+                </li>
+                <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                  <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Location</span>
+                  <span>██████</span>
+                </li>
+                <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                  <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Date</span>
+                  <span>2026:01:01 00:00:00</span>
+                </li>
+              </ul>
+              <p style={{ marginTop: "20px", fontSize: "12px", color: "#999", fontStyle: "italic" }}>
+                ※ 画像ファイルに追加情報が含まれている可能性があります
+              </p>
+            </div>
+          ) : (
+            <ul style={{ listStyle: "none", display: "grid", gap: "15px" }}>
+              <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Camera</span>
+                <span>Leica M10-R</span>
+              </li>
+              <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Lens</span>
+                <span>Summilux-M 35mm f/1.4</span>
+              </li>
+              <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Simulation</span>
+                <span>Custom Monochrome</span>
+              </li>
+              <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Print</span>
+                <span>Gelatin Silver Print</span>
+              </li>
+               <li style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "10px", fontSize: "14px" }}>
+                <span style={{ color: "var(--text-light)", fontWeight: "bold" }}>Size</span>
+                <span>A2 (420 x 594 mm)</span>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>
