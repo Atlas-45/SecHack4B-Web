@@ -1,4 +1,5 @@
 import Link from "next/link";
+import WifiGateDownload from "../components/WifiGateDownload";
 
 const pressKits = [
   {
@@ -8,28 +9,10 @@ const pressKits = [
     code: "KIT-A",
     files: [
       {
-        title: "プレスキット",
-        desc: "展示概要、ステートメント、コンセプト。",
-        href: "/press/kit-alpha/press-kit.txt",
-        size: "1.2 MB",
-      },
-      {
-        title: "掲載クレジット",
-        desc: "作家名、会場、協力クレジット。",
-        href: "/press/kit-alpha/credits.txt",
-        size: "450 KB",
-      },
-      {
-        title: "画像リスト",
-        desc: "公開可能な画像の整理とファイル名一覧。",
-        href: "/press/kit-alpha/image-list.txt",
-        size: "820 KB",
-      },
-      {
-        title: "README",
-        desc: "内容と利用条件の簡易メモ。",
-        href: "/press/kit-alpha/README.txt",
-        size: "3 KB",
+        title: "ZIPパッケージ",
+        desc: "基本素材をまとめたZIP。",
+        href: "/press/kit-alpha.zip",
+        size: "約 1.2 MB",
       },
     ],
   },
@@ -40,28 +23,10 @@ const pressKits = [
     code: "KIT-B",
     files: [
       {
-        title: "プレスキット",
-        desc: "展示概要、ディレクターコメント。",
-        href: "/press/kit-beta/press-kit.txt",
-        size: "1.1 MB",
-      },
-      {
-        title: "掲載クレジット",
-        desc: "クレジット一覧（短縮版）。",
-        href: "/press/kit-beta/credits.txt",
-        size: "420 KB",
-      },
-      {
-        title: "画像リスト",
-        desc: "差し替え用のサブカット一覧。",
-        href: "/press/kit-beta/image-list.txt",
-        size: "780 KB",
-      },
-      {
-        title: "README",
-        desc: "内容と利用条件の簡易メモ。",
-        href: "/press/kit-beta/README.txt",
-        size: "3 KB",
+        title: "ZIPパッケージ",
+        desc: "拡張素材をまとめたZIP。",
+        href: "/press/kit-beta.zip",
+        size: "約 1.1 MB",
       },
     ],
   },
@@ -72,28 +37,10 @@ const pressKits = [
     code: "KIT-C",
     files: [
       {
-        title: "プレスキット",
-        desc: "展示概要、背景資料の簡易版。",
-        href: "/press/kit-gamma/press-kit.txt",
-        size: "1.0 MB",
-      },
-      {
-        title: "掲載クレジット",
-        desc: "関係者・協力者の一覧。",
-        href: "/press/kit-gamma/credits.txt",
-        size: "430 KB",
-      },
-      {
-        title: "画像リスト",
-        desc: "アーカイブ用のファイル名一覧。",
-        href: "/press/kit-gamma/image-list.txt",
-        size: "800 KB",
-      },
-      {
-        title: "README",
-        desc: "内容と利用条件の簡易メモ。",
-        href: "/press/kit-gamma/README.txt",
-        size: "4 KB",
+        title: "ZIPパッケージ",
+        desc: "アーカイブ向け素材をまとめたZIP。",
+        href: "/press/kit-gamma.zip",
+        size: "約 1.0 MB",
       },
     ],
   },
@@ -161,9 +108,12 @@ export default function PressPage() {
                       <span style={{ display: "block", fontSize: "12px", color: "#999", fontFamily: "monospace", marginBottom: "4px" }}>SIZE: {asset.size}</span>
                       <span style={{ display: "block", fontSize: "12px", color: "#999" }}>Monthly Update</span>
                     </div>
-                    <a className="button" href={asset.href} download style={{ minWidth: "140px", borderRadius: "0", background: "#333" }}>
-                      Download &darr;
-                    </a>
+                    <WifiGateDownload
+                      className="button"
+                      href={asset.href}
+                      label="Download ↓"
+                      style={{ minWidth: "140px", borderRadius: "0", background: "#333" }}
+                    />
                   </div>
                 ))}
               </div>
