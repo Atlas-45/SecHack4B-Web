@@ -2,6 +2,14 @@
 
 # dependencies
 /node_modules
+
+# remotion renders
+/out
+/renders
+
+# remotion sources
+/remotion
+/remotion.config.ts
 /.pnp
 .pnp.*
 .yarn/*
