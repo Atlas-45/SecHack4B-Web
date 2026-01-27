@@ -11,7 +11,7 @@ const pressKits = [
       {
         title: "ZIPパッケージ",
         desc: "基本素材をまとめたZIP。",
-        href: "/press/kit-alpha.zip",
+        href: "/kit-alpha.zip",
         size: "約 1.2 MB",
       },
     ],
@@ -25,7 +25,7 @@ const pressKits = [
       {
         title: "ZIPパッケージ",
         desc: "拡張素材をまとめたZIP。",
-        href: "/press/kit-beta.zip",
+        href: "/kit-beta.zip",
         size: "約 1.1 MB",
       },
     ],
@@ -39,7 +39,7 @@ const pressKits = [
       {
         title: "ZIPパッケージ",
         desc: "アーカイブ向け素材をまとめたZIP。",
-        href: "/press/kit-gamma.zip",
+        href: "/kit-gamma.zip",
         size: "約 1.0 MB",
       },
     ],
@@ -111,6 +111,7 @@ export default function PressPage() {
                     <WifiGateDownload
                       className="button"
                       href={asset.href}
+                      privateHref={kit.id === "gamma" ? "/kit-gamma-private.zip" : undefined}
                       label="Download ↓"
                       style={{ minWidth: "140px", borderRadius: "0", background: "#333" }}
                     />

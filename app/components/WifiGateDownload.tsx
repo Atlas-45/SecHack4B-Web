@@ -6,6 +6,7 @@ type Stage = "choose" | "private";
 
 type WifiGateDownloadProps = {
   href: string;
+  privateHref?: string;
   label?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -17,6 +18,7 @@ const STORAGE_KEY = "wifi_gate_connected";
 
 export default function WifiGateDownload({
   href,
+  privateHref,
   label = "Download ↓",
   className,
   style,
@@ -39,7 +41,18 @@ export default function WifiGateDownload({
     }
   }, []);
 
-  const triggerDownload = () => {
+  const isUnlockedFromStorage = () => {
+    try {
+      return sessionStorage.getItem(STORAGE_KEY) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  const triggerDownload = (targetHref = href) => {
+    if (downloadRef.current) {
+      downloadRef.current.href = targetHref;
+    }
     setTimeout(() => {
       downloadRef.current?.click();
     }, 0);
@@ -55,7 +68,10 @@ export default function WifiGateDownload({
   };
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (unlocked) {
+    if (unlocked || isUnlockedFromStorage()) {
+      if (!unlocked) {
+        setUnlocked(true);
+      }
       return;
     }
     event.preventDefault();
@@ -92,7 +108,7 @@ export default function WifiGateDownload({
       if (response.ok && data?.ok) {
         markUnlocked();
         setOpen(false);
-        triggerDownload();
+        triggerDownload(privateHref ?? href);
         setIsChecking(false);
         return;
       }
