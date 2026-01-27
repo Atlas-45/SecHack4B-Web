@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Stage = "choose" | "private" | "checking";
+type Stage = "choose" | "private";
 
 type WifiGateDownloadProps = {
   href: string;
@@ -27,6 +27,7 @@ export default function WifiGateDownload({
   const [open, setOpen] = useState(false);
   const [stage, setStage] = useState<Stage>("choose");
   const [password, setPassword] = useState("");
+  const [isChecking, setIsChecking] = useState(false);
   const [error, setError] = useState("");
   const downloadRef = useRef<HTMLAnchorElement>(null);
 
@@ -77,7 +78,7 @@ export default function WifiGateDownload({
       return;
     }
 
-    setStage("checking");
+    setIsChecking(true);
     setError("");
 
     try {
@@ -92,12 +93,14 @@ export default function WifiGateDownload({
         markUnlocked();
         setOpen(false);
         triggerDownload();
+        setIsChecking(false);
         return;
       }
     } catch {
       // fall through to error message
     }
 
+    setIsChecking(false);
     setPassword("");
     setStage("choose");
     setError("パスワードが違います。ネットワークを選択し直してください。");
@@ -176,8 +179,8 @@ export default function WifiGateDownload({
                   <button type="button" className="wifi-ghost" onClick={() => setStage("choose")}>
                     戻る
                   </button>
-                  <button type="submit" className="button" disabled={stage === "checking"}>
-                    {stage === "checking" ? "確認中..." : "接続"}
+                  <button type="submit" className="button" disabled={isChecking}>
+                    {isChecking ? "確認中..." : "接続"}
                   </button>
                 </div>
               </form>
