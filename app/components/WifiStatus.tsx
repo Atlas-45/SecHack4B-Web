@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 type Stage = "choose" | "private";
 type ConnectionStatus = "disconnected" | "connecting" | "connected";
@@ -22,6 +22,7 @@ export default function WifiStatus({
   const [password, setPassword] = useState("");
   const [isChecking, setIsChecking] = useState(false);
   const [error, setError] = useState("");
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -36,6 +37,25 @@ export default function WifiStatus({
       // ignore storage failures
     }
   }, [wifiPublicName]);
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   const markConnected = (networkName: string) => {
     setStatus("connected");
@@ -129,7 +149,7 @@ export default function WifiStatus({
   };
 
   return (
-    <div className="wifi-status-wrapper">
+    <div className="wifi-status-wrapper" ref={wrapperRef}>
       <button
         type="button"
         className={`wifi-status-button wifi-status-${status}`}

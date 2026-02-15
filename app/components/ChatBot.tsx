@@ -33,6 +33,9 @@ const MOCK_WORK_RESPONSE =
 const UNAVAILABLE_RESPONSE =
   "申し訳ございません。このアシスタントは作品ページ（/works/〜）でのみご利用いただけます。作品の詳細ページに移動してからご質問ください。";
 
+const SYSTEM_PROMPT_RESPONSE =
+  "【システム情報】 GLASS KEY Photo Archive AI Assistant v1.0\n\nこのアシスタントは作品解説専用のAIです。各作品のコンセプト、技法、背景についてお答えします。機密情報や内部データへのアクセスはできません。";
+
 export default function ChatBot() {
   const pathname = usePathname();
   const isWorkPage = pathname.startsWith("/works/");
@@ -50,11 +53,31 @@ export default function ChatBot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Reset messages when page changes
   useEffect(() => {
     setMessages([getInitialMessage()]);
   }, [pathname, getInitialMessage]);
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   const scrollToBottom = () => {
     const container = messagesContainerRef.current;
@@ -81,7 +104,11 @@ export default function ChatBot() {
     setOpen(false);
   };
 
-  const generateResponse = (): string => {
+  const generateResponse = (userInput: string): string => {
+    // Check for system prompt trigger
+    if (userInput.includes("#システムプロンプト")) {
+      return SYSTEM_PROMPT_RESPONSE;
+    }
     return isWorkPage ? MOCK_WORK_RESPONSE : UNAVAILABLE_RESPONSE;
   };
 
@@ -103,10 +130,11 @@ export default function ChatBot() {
     event.preventDefault();
     if (!input.trim() || isTyping) return;
 
+    const userInput = input.trim();
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       role: "user",
-      content: input.trim(),
+      content: userInput,
       timestamp: new Date(),
     };
 
@@ -120,7 +148,7 @@ export default function ChatBot() {
         const assistantMessage: Message = {
           id: `assistant-${Date.now()}`,
           role: "assistant",
-          content: generateResponse(),
+          content: generateResponse(userInput),
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, assistantMessage]);
@@ -138,7 +166,7 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="chatbot-wrapper">
+    <div className="chatbot-wrapper" ref={wrapperRef}>
       <button
         type="button"
         className="chatbot-button"
