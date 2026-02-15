@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
+import WifiStatus from "./components/WifiStatus";
 
 const bodyFont = Noto_Sans_JP({
   weight: ["400", "500", "700"],
@@ -54,6 +55,7 @@ export default function RootLayout({
               ))}
             </nav>
           </div>
+          <WifiStatus />
         </header>
 
         <main>{children}</main>
@@ -64,7 +66,8 @@ export default function RootLayout({
               <div className="footer-col">
                 <h4>GLASS KEY</h4>
                 <p>
-                  「██████」による<br />
+                  「██████」による
+                  <br />
                   作品アーカイブ。
                 </p>
                 <p>██████, Japan</p>

@@ -24,7 +24,9 @@ html {
 body {
   color: var(--text);
   background: var(--bg);
-  font-family: var(--font-sans), "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-family:
+    var(--font-sans), "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
   font-size: 16px;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
@@ -69,6 +71,8 @@ img {
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
 }
 
 .header-inner {
@@ -76,6 +80,7 @@ img {
   justify-content: space-between;
   align-items: center;
   height: 80px;
+  flex: 1;
 }
 
 .brand {
@@ -110,7 +115,7 @@ img {
 }
 
 .site-nav a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -122,6 +127,109 @@ img {
 
 .site-nav a:hover::after {
   width: 100%;
+}
+
+/* Header Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* WiFi Status Wrapper */
+.wifi-status-wrapper {
+  position: relative;
+  margin-right: 24px;
+  flex-shrink: 0;
+}
+
+/* WiFi Status Button */
+.wifi-status-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.wifi-status-button:hover {
+  background: var(--border);
+}
+
+.wifi-icon {
+  transition: color 0.3s ease;
+}
+
+.wifi-status-disconnected .wifi-icon {
+  color: var(--text-light);
+}
+
+.wifi-status-connecting .wifi-icon {
+  color: #f0a000;
+  animation: wifi-pulse 1s ease-in-out infinite;
+}
+
+.wifi-status-connected .wifi-icon {
+  color: #28a745;
+}
+
+.wifi-connecting-indicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: #f0a000;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  animation: wifi-blink 0.8s ease-in-out infinite;
+}
+
+@keyframes wifi-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes wifi-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.wifi-connected-info {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.wifi-connected-info .wifi-modal-sub {
+  margin-bottom: 24px;
+}
+
+.wifi-disconnect {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+.wifi-disconnect:hover {
+  background: #c82333;
+  border-color: #c82333;
 }
 
 /* Hero */
@@ -147,14 +255,14 @@ img {
   font-size: clamp(32px, 5vw, 56px);
   font-weight: 700;
   margin-bottom: 20px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-desc {
   font-size: 18px;
   margin-bottom: 40px;
   opacity: 0.95;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Hero Buttons */
@@ -165,19 +273,19 @@ img {
   padding: 12px 36px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .hero-section .btn:hover {
   background: transparent;
   border-color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   color: #ffffff;
 }
 
 .hero-section .btn-outline {
-  border: 2px solid rgba(255,255,255,0.7);
+  border: 2px solid rgba(255, 255, 255, 0.7);
   color: #ffffff;
   padding: 12px 36px;
   font-weight: 600;
@@ -191,7 +299,7 @@ img {
   color: #1a1a1a;
   border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .btn {
@@ -241,7 +349,7 @@ img {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 3px;
@@ -269,7 +377,7 @@ img {
 }
 
 .news-date {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: var(--text-light);
   font-size: 14px;
   min-width: 100px;
@@ -305,12 +413,14 @@ img {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .work-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 .work-img {
@@ -470,7 +580,7 @@ img {
 
 .footer-bottom {
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 20px;
   font-size: 12px;
   color: #777;
@@ -481,16 +591,16 @@ img {
   .site-nav {
     display: none; /* Simplification for now, would need a hamburger menu */
   }
-  
+
   .news-item {
     flex-direction: column;
     gap: 5px;
   }
-  
+
   .section {
     padding: 60px 0;
   }
-  
+
   .two-col,
   .grid-2,
   .table-row {
@@ -626,21 +736,21 @@ img {
 .wifi-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 2000;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1999;
 }
 
 .wifi-modal {
-  width: min(560px, 100%);
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(400px, 90vw);
   background: #ffffff;
   border-radius: 8px;
   border: 1px solid var(--border);
-  padding: 28px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
 }
 
 .wifi-modal-header {
