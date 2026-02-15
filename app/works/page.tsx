@@ -16,15 +16,32 @@ const tags = [
 export default function WorksPage() {
   const [selectedTag, setSelectedTag] = useState("All");
 
-  const filteredWorks = selectedTag === "All" 
-    ? works 
-    : works.filter((work) => work.tag === selectedTag);
+  const visibleWorks = works.filter(
+    (work) => !("hidden" in work && work.hidden),
+  );
+  const filteredWorks =
+    selectedTag === "All"
+      ? visibleWorks
+      : visibleWorks.filter((work) => work.tag === selectedTag);
 
   return (
     <div className="container" style={{ paddingBlock: "60px" }}>
-      <header className="page-header" style={{ marginBottom: "60px", borderBottom: "none", textAlign: "center" }}>
+      <header
+        className="page-header"
+        style={{
+          marginBottom: "60px",
+          borderBottom: "none",
+          textAlign: "center",
+        }}
+      >
         <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>Works</h1>
-        <p style={{ maxWidth: "600px", margin: "0 auto", color: "var(--text-light)" }}>
+        <p
+          style={{
+            maxWidth: "600px",
+            margin: "0 auto",
+            color: "var(--text-light)",
+          }}
+        >
           「██████」による作品アーカイブ。
           現在公開が許可されている作品のみを掲載しています。
         </p>
@@ -32,32 +49,32 @@ export default function WorksPage() {
 
       <section style={{ marginBottom: "60px" }}>
         <div className="badge-grid" style={{ justifyContent: "center" }}>
-          <button 
+          <button
             onClick={() => setSelectedTag("All")}
-            className="tag" 
-            style={{ 
-              background: selectedTag === "All" ? "var(--accent)" : "#f0f0f0", 
+            className="tag"
+            style={{
+              background: selectedTag === "All" ? "var(--accent)" : "#f0f0f0",
               color: selectedTag === "All" ? "white" : "#555",
               border: "none",
               cursor: "pointer",
               fontSize: "13px",
-              fontFamily: "inherit"
+              fontFamily: "inherit",
             }}
           >
             All
           </button>
           {tags.map((tag) => (
-            <button 
-              key={tag} 
+            <button
+              key={tag}
               onClick={() => setSelectedTag(tag)}
-              className="tag" 
+              className="tag"
               style={{
-                background: selectedTag === tag ? "var(--accent)" : "#f0f0f0", 
+                background: selectedTag === tag ? "var(--accent)" : "#f0f0f0",
                 color: selectedTag === tag ? "white" : "#555",
                 border: "none",
                 cursor: "pointer",
                 fontSize: "13px",
-                fontFamily: "inherit"
+                fontFamily: "inherit",
               }}
             >
               {tag}
@@ -68,17 +85,54 @@ export default function WorksPage() {
 
       <section className="grid grid-3">
         {filteredWorks.map((work) => (
-          <Link href={`/works/${work.id}`} key={work.id} className="work-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link
+            href={`/works/${work.id}`}
+            key={work.id}
+            className="work-card"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             {/* Glitch effect (disabled): className="work-img glitch" */}
-            <div className="work-img" style={{ backgroundImage: `url(${work.image})`, height: "240px", backgroundColor: work.id === "GK-000" ? "#000" : undefined }} />
+            <div
+              className="work-img"
+              style={{
+                backgroundImage: `url(${work.image})`,
+                height: "240px",
+                backgroundColor: work.id === "GK-000" ? "#000" : undefined,
+              }}
+            />
             <div className="work-body">
-              <span className="work-cat" style={{ fontSize: "11px", letterSpacing: "0.1em" }}>{work.tag}</span>
-              <h3 className="work-title" style={{ fontSize: "20px", marginTop: "5px", marginBottom: "15px" }}>{work.title}</h3>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <p className="work-meta" style={{ fontSize: "12px", fontFamily: "monospace" }}>
+              <span
+                className="work-cat"
+                style={{ fontSize: "11px", letterSpacing: "0.1em" }}
+              >
+                {work.tag}
+              </span>
+              <h3
+                className="work-title"
+                style={{
+                  fontSize: "20px",
+                  marginTop: "5px",
+                  marginBottom: "15px",
+                }}
+              >
+                {work.title}
+              </h3>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <p
+                  className="work-meta"
+                  style={{ fontSize: "12px", fontFamily: "monospace" }}
+                >
                   {work.location} / {work.year}
                 </p>
-                <span style={{ fontSize: "12px", color: "var(--accent)" }}>View Detail &rarr;</span>
+                <span style={{ fontSize: "12px", color: "var(--accent)" }}>
+                  View Detail &rarr;
+                </span>
               </div>
             </div>
           </Link>

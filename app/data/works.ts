@@ -4,36 +4,44 @@ export const works = [
     location: "横浜",
     year: "2025",
     tag: "Monochrome",
-    image: "https://images.unsplash.com/photo-1617438817509-70e91ad264a5?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1617438817509-70e91ad264a5?q=80&w=1200&auto=format&fit=crop",
     id: "GK-025",
-    description: "早朝の横浜港、霧に包まれた水面を長時間露光で捉えた作品。視界が遮られることで強調される都市の静寂と、水面の滑らかな質感が、現実と幻想の境界を曖昧にする。",
+    description:
+      "早朝の横浜港、霧に包まれた水面を長時間露光で捉えた作品。視界が遮られることで強調される都市の静寂と、水面の滑らかな質感が、現実と幻想の境界を曖昧にする。",
   },
   {
     title: "午後の余白",
     location: "代官山",
     year: "2024",
     tag: "Portrait",
-    image: "https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=1200&auto=format&fit=crop",
     id: "GK-018",
-    description: "都市の喧騒の中にふと訪れる静寂の瞬間。柔らかな午後の光が人物の輪郭を優しく縁取り、日常の中に潜むドラマチックな一瞬を切り取っている。",
+    description:
+      "都市の喧騒の中にふと訪れる静寂の瞬間。柔らかな午後の光が人物の輪郭を優しく縁取り、日常の中に潜むドラマチックな一瞬を切り取っている。",
   },
   {
     title: "境界線",
     location: "竹芝",
     year: "2025",
     tag: "Architecture",
-    image: "https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=1200&auto=format&fit=crop",
     id: "GK-021",
-    description: "人工物と自然、光と影、過去と未来。都市に存在する様々な「境界線」をテーマに、幾何学的な構図で建築物を捉えたシリーズ。シャープなラインが都市の冷徹さと美しさを同時に表現する。",
+    description:
+      "人工物と自然、光と影、過去と未来。都市に存在する様々な「境界線」をテーマに、幾何学的な構図で建築物を捉えたシリーズ。シャープなラインが都市の冷徹さと美しさを同時に表現する。",
   },
   {
     title: "雨の標本",
     location: "神田",
     year: "2023",
     tag: "Series",
-    image: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1200&auto=format&fit=crop",
     id: "GK-012",
-    description: "雨上がりの路上に残された痕跡をクローズアップで撮影。濡れたアスファルト、反射するネオン、水滴の輝きが、都市の記憶を標本のように閉じ込めている。",
+    description:
+      "雨上がりの路上に残された痕跡をクローズアップで撮影。濡れたアスファルト、反射するネオン、水滴の輝きが、都市の記憶を標本のように閉じ込めている。",
   },
   {
     title: "██████",
@@ -49,44 +57,55 @@ export const works = [
     location: "新木場",
     year: "2024",
     tag: "Industrial",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
     id: "GK-019",
-    description: "深夜の工場地帯、絶え間なく動き続ける物流の現場。人工的な照明に照らし出された無機質な構造物と、そこで働く人々の気配を、冷たくも美しいトーンで表現。",
+    description:
+      "深夜の工場地帯、絶え間なく動き続ける物流の現場。人工的な照明に照らし出された無機質な構造物と、そこで働く人々の気配を、冷たくも美しいトーンで表現。",
   },
   {
     title: "旧街区",
     location: "根岸",
     year: "2022",
     tag: "Landscape",
-    image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=1200&auto=format&fit=crop",
     id: "GK-009",
-    description: "再開発によって消えゆく古い街並み。朽ちかけた壁、錆びた看板、路地の奥の生活感。失われゆく昭和の面影を、記録として、そして記憶として留めるためのランドスケープ。",
+    description:
+      "再開発によって消えゆく古い街並み。朽ちかけた壁、錆びた看板、路地の奥の生活感。失われゆく昭和の面影を、記録として、そして記憶として留めるためのランドスケープ。",
   },
   {
     title: "雨粒の建築",
     location: "天王洲",
     year: "2025",
     tag: "Architecture",
-    image: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop",
     id: "GK-026",
-    description: "ガラス越しの雨粒が作り出す、歪んだ都市の風景。水滴の一つ一つがレンズとなり、背後の建築物を抽象的なパターンへと変換する。マクロ視点から見るもう一つの都市建築。",
+    description:
+      "ガラス越しの雨粒が作り出す、歪んだ都市の風景。水滴の一つ一つがレンズとなり、背後の建築物を抽象的なパターンへと変換する。マクロ視点から見るもう一つの都市建築。",
   },
   {
     title: "薄明",
     location: "上野",
     year: "2023",
     tag: "Portrait",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
     id: "GK-013",
-    description: "日没直後のマジックアワー、空が群青色に染まる短い時間。都市の灯りが灯り始めるその瞬間に、人々の表情に落ちる微かな陰影を捉えたポートレートシリーズ。",
+    description:
+      "日没直後のマジックアワー、空が群青色に染まる短い時間。都市の灯りが灯り始めるその瞬間に、人々の表情に落ちる微かな陰影を捉えたポートレートシリーズ。",
   },
   {
     title: "航路",
     location: "芝浦",
     year: "2024",
     tag: "Series",
-    image: "https://images.unsplash.com/photo-1542931287-023b922fa89b?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1542931287-023b922fa89b?q=80&w=1200&auto=format&fit=crop",
     id: "GK-017",
-    description: "運河を行き交う船の航跡と、水面に揺れるビル群の影。都市を流れる水路を「道」として捉え直し、水上からの視点で東京の風景を再構築したシリーズ。",
+    description:
+      "運河を行き交う船の航跡と、水面に揺れるビル群の影。都市を流れる水路を「道」として捉え直し、水上からの視点で東京の風景を再構築したシリーズ。",
+    hidden: true,
   },
 ];
