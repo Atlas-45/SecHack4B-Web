@@ -370,6 +370,27 @@ img {
   cursor: not-allowed;
 }
 
+.chatbot-download-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chatbot-download-button:hover {
+  background: var(--accent-hover, #444);
+  transform: translateY(-1px);
+}
+
 /* WiFi Status Wrapper */
 .wifi-status-wrapper {
   position: relative;
