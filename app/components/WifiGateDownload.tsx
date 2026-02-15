@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-type Stage = "choose" | "private";
+import { useEffect, useState, useCallback } from "react";
 
 type WifiGateDownloadProps = {
   href: string;
@@ -10,8 +8,6 @@ type WifiGateDownloadProps = {
   label?: string;
   className?: string;
   style?: React.CSSProperties;
-  wifiPublicName?: string;
-  wifiPrivateName?: string;
 };
 
 const STORAGE_KEY = "wifi_gate_connected";
@@ -22,187 +18,124 @@ export default function WifiGateDownload({
   label = "Download ↓",
   className,
   style,
-  wifiPublicName = "PUBLIC_NET",
-  wifiPrivateName = "PRIVATE_NET",
 }: WifiGateDownloadProps) {
-  const [unlocked, setUnlocked] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [stage, setStage] = useState<Stage>("choose");
-  const [password, setPassword] = useState("");
-  const [isChecking, setIsChecking] = useState(false);
-  const [error, setError] = useState("");
-  const downloadRef = useRef<HTMLAnchorElement>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
 
-  useEffect(() => {
-    try {
-      setUnlocked(sessionStorage.getItem(STORAGE_KEY) === "1");
-    } catch {
-      setUnlocked(false);
-    }
-  }, []);
-
-  const isUnlockedFromStorage = () => {
+  const checkConnection = useCallback(() => {
     try {
       return sessionStorage.getItem(STORAGE_KEY) === "1";
     } catch {
       return false;
     }
-  };
+  }, []);
 
-  const triggerDownload = (targetHref = href) => {
-    if (downloadRef.current) {
-      downloadRef.current.href = targetHref;
-    }
-    setTimeout(() => {
-      downloadRef.current?.click();
-    }, 0);
-  };
+  useEffect(() => {
+    setIsConnected(checkConnection());
 
-  const markUnlocked = () => {
-    setUnlocked(true);
-    try {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      // ignore storage failures
-    }
-  };
+    // Listen for storage changes (when WiFi connects/disconnects)
+    const handleStorageChange = () => {
+      setIsConnected(checkConnection());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    // Also check periodically for same-tab changes
+    const interval = setInterval(() => {
+      setIsConnected(checkConnection());
+    }, 500);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [checkConnection]);
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (unlocked || isUnlockedFromStorage()) {
-      if (!unlocked) {
-        setUnlocked(true);
-      }
-      return;
-    }
-    event.preventDefault();
-    setError("");
-    setPassword("");
-    setStage("choose");
-    setOpen(true);
-  };
+    // Re-check connection status at click time
+    const connected = checkConnection();
+    setIsConnected(connected);
 
-  const handlePublic = () => {
-    markUnlocked();
-    setOpen(false);
-    triggerDownload();
-  };
-
-  const handlePrivateSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!password.trim()) {
-      setError("パスワードを入力してください。");
+    if (!connected) {
+      event.preventDefault();
+      setShowWarning(true);
       return;
     }
 
-    setIsChecking(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/wifi/validate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
-      const data = await response.json().catch(() => null);
-
-      if (response.ok && data?.ok) {
-        markUnlocked();
-        setOpen(false);
-        triggerDownload(privateHref ?? href);
-        setIsChecking(false);
-        return;
-      }
-    } catch {
-      // fall through to error message
+    // If connected and privateHref exists, use that instead
+    if (privateHref) {
+      event.preventDefault();
+      const link = document.createElement("a");
+      link.href = privateHref;
+      link.download = "";
+      link.click();
     }
-
-    setIsChecking(false);
-    setPassword("");
-    setStage("choose");
-    setError("パスワードが違います。ネットワークを選択し直してください。");
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseWarning = () => {
+    setShowWarning(false);
   };
 
   return (
     <>
-      <a className={className} href={href} download onClick={handleClick} style={style}>
+      <a
+        className={className}
+        href={href}
+        download
+        onClick={handleClick}
+        style={style}
+      >
         {label}
       </a>
-      <a ref={downloadRef} href={href} download style={{ display: "none" }} tabIndex={-1} aria-hidden="true" />
 
-      {open && (
-        <div className="wifi-modal-backdrop" role="dialog" aria-modal="true">
-          <div className="wifi-modal">
-            <div className="wifi-modal-header">
-              <div>
-                <p className="wifi-modal-eyebrow">NETWORK ACCESS</p>
-                <h3>Wi-Fi接続の選択</h3>
-              </div>
-              <button type="button" className="wifi-ghost" onClick={handleClose}>
-                閉じる
-              </button>
-            </div>
-
-            <p className="wifi-modal-sub">
-              初回ダウンロードの前に、接続するネットワークを選択してください。
-            </p>
-
-            {error && (
-              <div className="wifi-error" role="status" aria-live="polite">
-                {error}
-              </div>
-            )}
-
-            {stage === "choose" && (
-              <div className="wifi-options">
-                <div className="wifi-option">
-                  <div>
-                    <div className="wifi-option-title">{wifiPublicName}</div>
-                    <div className="wifi-option-meta">PUBLIC / パスワード不要</div>
-                  </div>
-                  <button type="button" className="button" onClick={handlePublic}>
-                    接続
-                  </button>
-                </div>
-
-                <div className="wifi-option">
-                  <div>
-                    <div className="wifi-option-title">{wifiPrivateName}</div>
-                    <div className="wifi-option-meta">PRIVATE / パスワード必須</div>
-                  </div>
-                  <button type="button" className="button" onClick={() => setStage("private")}>
-                    選択
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {stage === "private" && (
-              <form className="wifi-form" onSubmit={handlePrivateSubmit}>
-                <label htmlFor="wifi-password">{wifiPrivateName} パスワード</label>
-                <input
-                  id="wifi-password"
-                  className="input"
-                  type="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  autoComplete="current-password"
+      {showWarning && (
+        <>
+          <div className="wifi-modal-backdrop" onClick={handleCloseWarning} />
+          <div
+            className="wifi-warning-modal"
+            role="alertdialog"
+            aria-modal="true"
+          >
+            <div className="wifi-warning-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                <line x1="12" y1="20" x2="12" y2="20" />
+                <line
+                  x1="2"
+                  y1="2"
+                  x2="22"
+                  y2="22"
+                  stroke="#dc3545"
+                  strokeWidth="2"
                 />
-                <div className="wifi-modal-actions">
-                  <button type="button" className="wifi-ghost" onClick={() => setStage("choose")}>
-                    戻る
-                  </button>
-                  <button type="submit" className="button" disabled={isChecking}>
-                    {isChecking ? "確認中..." : "接続"}
-                  </button>
-                </div>
-              </form>
-            )}
+              </svg>
+            </div>
+            <h3 className="wifi-warning-title">Wi-Fi未接続</h3>
+            <p className="wifi-warning-message">
+              ダウンロードするにはWi-Fiに接続してください。
+              <br />
+              画面右上のWi-Fiアイコンから接続できます。
+            </p>
+            <button
+              type="button"
+              className="button wifi-warning-button"
+              onClick={handleCloseWarning}
+            >
+              閉じる
+            </button>
           </div>
-        </div>
+        </>
       )}
     </>
   );

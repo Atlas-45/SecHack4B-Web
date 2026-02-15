@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
+import ChatBot from "./components/ChatBot";
 import WifiStatus from "./components/WifiStatus";
 
 const bodyFont = Noto_Sans_JP({
@@ -55,6 +56,7 @@ export default function RootLayout({
               ))}
             </nav>
           </div>
+          <ChatBot />
           <WifiStatus />
         </header>
 

@@ -129,13 +129,242 @@ img {
   width: 100%;
 }
 
-/* Header Right Section */
-.header-right {
+/* ChatBot */
+.chatbot-wrapper {
+  position: relative;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.chatbot-button {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chatbot-button:hover {
+  background: var(--border);
+}
+
+.chatbot-icon {
+  color: var(--text-light);
+  transition: color 0.3s ease;
+}
+
+.chatbot-button:hover .chatbot-icon {
+  color: var(--accent);
+}
+
+.chatbot-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1999;
+}
+
+.chatbot-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(420px, 90vw);
+  height: min(520px, 70vh);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 20px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.chatbot-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.chatbot-header h3 {
+  font-size: 18px;
+  font-family: var(--font-serif), serif;
+  margin: 0;
+}
+
+.chatbot-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chatbot-close:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.chatbot-messages {
   flex: 1;
-  justify-content: flex-end;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chatbot-message {
+  max-width: 85%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chatbot-message-user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.chatbot-message-assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.chatbot-message-content {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.chatbot-message-user .chatbot-message-content {
+  background: var(--accent);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chatbot-message-assistant .chatbot-message-content {
+  background: var(--bg-alt);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+.chatbot-message-time {
+  font-size: 11px;
+  color: var(--text-light);
+  padding: 0 8px;
+}
+
+.chatbot-typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background: var(--bg-alt);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+}
+
+.chatbot-typing span {
+  width: 8px;
+  height: 8px;
+  background: var(--text-light);
+  border-radius: 50%;
+  animation: chatbot-typing-bounce 1.4s ease-in-out infinite;
+}
+
+.chatbot-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.chatbot-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes chatbot-typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+.chatbot-input-form {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+
+.chatbot-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.chatbot-input:focus {
+  border-color: var(--accent);
+}
+
+.chatbot-input::placeholder {
+  color: var(--text-light);
+}
+
+.chatbot-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chatbot-send:hover:not(:disabled) {
+  background: var(--accent-hover, #444);
+  transform: scale(1.05);
+}
+
+.chatbot-send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* WiFi Status Wrapper */
@@ -835,6 +1064,45 @@ img {
   border-radius: 4px;
   font-size: 13px;
   margin-bottom: 12px;
+}
+
+/* WiFi Warning Modal */
+.wifi-warning-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(400px, 90vw);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  text-align: center;
+}
+
+.wifi-warning-icon {
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.wifi-warning-title {
+  font-size: 22px;
+  font-family: var(--font-serif), serif;
+  margin-bottom: 12px;
+  color: #dc3545;
+}
+
+.wifi-warning-message {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.wifi-warning-button {
+  min-width: 120px;
 }
 
 /* Lists and Tables */
