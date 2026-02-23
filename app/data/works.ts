@@ -108,4 +108,16 @@ export const works = [
       "運河を行き交う船の航跡と、水面に揺れるビル群の影。都市を流れる水路を「道」として捉え直し、水上からの視点で東京の風景を再構築したシリーズ。",
     hidden: true,
   },
+  {
+    title: "夜明けの港",
+    location: "横浜",
+    year: "2025",
+    tag: "Monochrome",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop",
+    id: "GK-027",
+    description:
+      "夜明け前の横浜港、静寂に包まれた埠頭を捉えた作品。闇から光へと移り変わる空のグラデーションと、それを映す水面の静謐な美しさ。都市が目覚める前の、最も静かで神聖な瞬間。",
+    hidden: true,
+  },
 ];

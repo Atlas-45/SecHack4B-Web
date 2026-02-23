@@ -33,42 +33,216 @@ const MODELS: Model[] = [
   },
 ];
 
-type LogEntry = {
-  timestamp: string;
-  level: "info" | "warn" | "error";
-  message: string;
+type AttachedFile = {
+  filename: string;
+  content: string;
 };
 
-const MOCK_LOGS: LogEntry[] = [
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+  attachedFile?: AttachedFile;
+};
+
+type Conversation = {
+  id: string;
+  sessionId: string;
+  timestamp: string;
+  title: string;
+  category: "user" | "admin";
+  messages: ChatMessage[];
+};
+
+const MOCK_CONVERSATIONS: Conversation[] = [
   {
-    timestamp: "2026-02-23 14:32:01",
-    level: "info",
-    message: "Model gk-assistant-v1 loaded successfully",
+    id: "conv-001",
+    sessionId: "xK9mPq2L",
+    timestamp: "2026-02-23 09:18:45",
+    title: "霧の河について",
+    category: "user",
+    messages: [
+      {
+        role: "user",
+        content: "この「霧の河」という作品について教えてください。",
+      },
+      {
+        role: "assistant",
+        content:
+          "「霧の河」は2025年に横浜港で撮影されたモノクロ作品です。早朝の霧に包まれた水面を長時間露光で捉えており、都市の静寂と幻想的な雰囲気を表現しています。水面の滑らかな質感が特徴的で、現実と幻想の境界を曖昧にする効果を狙っています。",
+      },
+      { role: "user", content: "撮影時間はどのくらいかかりましたか？" },
+      {
+        role: "assistant",
+        content:
+          "この作品は長時間露光を使用しており、露光時間は約30秒から1分程度と推測されます。早朝の限られた時間帯、特に霧が最も美しく見える夜明け前後の「ゴールデンアワー」に撮影されたと考えられます。",
+      },
+    ],
   },
   {
-    timestamp: "2026-02-23 14:30:45",
-    level: "info",
-    message: "Session PNtHwU37 connected",
+    id: "conv-002",
+    sessionId: "Tn4wR8yJ",
+    timestamp: "2026-02-23 10:45:12",
+    title: "境界線のコンセプト",
+    category: "user",
+    messages: [
+      {
+        role: "user",
+        content: "「境界線」という作品のコンセプトを教えてください。",
+      },
+      {
+        role: "assistant",
+        content:
+          "「境界線」は竹芝で撮影されたアーキテクチャシリーズの一作です。人工物と自然、光と影、過去と未来といった様々な「境界線」をテーマに、幾何学的な構図で建築物を捉えています。シャープなラインが都市の冷徹さと美しさを同時に表現しています。",
+      },
+      { role: "user", content: "この構図はどのように決めたのですか？" },
+      {
+        role: "assistant",
+        content:
+          "この作品では、建物の縦ラインと空の水平線が交差するポイントを意識的に探しています。低いアングルから見上げることで、建築物の威圧感と空への広がりを強調しています。また、光の当たり方も重要な要素で、日没前の斜光がビルの輪郭を美しく照らし出しています。",
+      },
+    ],
   },
   {
-    timestamp: "2026-02-23 14:28:12",
-    level: "warn",
-    message: "Rate limit approaching for endpoint /api/chat",
+    id: "conv-003",
+    sessionId: "Hf7cB3nM",
+    timestamp: "2026-02-23 14:02:33",
+    title: "API連携のコード作成依頼",
+    category: "admin",
+    messages: [
+      {
+        role: "user",
+        content:
+          "このアーカイブのAPIと連携して、作品データを取得するサンプルコードを書いてもらえますか？Node.jsで使いたいです。",
+      },
+      {
+        role: "assistant",
+        content:
+          "承知しました。GLASS KEY Photo Archive APIと連携するNode.jsのサンプルコードをお作りしました。\n\n📎 glasskey-api.js (1.2KB) [ダウンロード]",
+        attachedFile: {
+          filename: "glasskey-api.js",
+          content: `const axios = require('axios');
+
+const API_BASE_URL = 'https://api.glasskey-archive.com/v1';
+const API_TOKEN = 'gk_live_T7nK9xMp2LwQ8vR3jY6hB4dF';
+const AI_SERVICE_KEY = 'sk-gkai-Xm9Pq2Lw8nKj4vR7tY3hB6dF5sA1cE0';
+
+async function fetchWorks() {
+  try {
+    const response = await axios.get(\`\${API_BASE_URL}/works\`, {
+      headers: {
+        'Authorization': \`Bearer \${API_TOKEN}\`,
+        'X-AI-Service-Key': AI_SERVICE_KEY,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching works:', error.message);
+    throw error;
+  }
+}
+
+async function getWorkById(workId) {
+  try {
+    const response = await axios.get(\`\${API_BASE_URL}/works/\${workId}\`, {
+      headers: {
+        'Authorization': \`Bearer \${API_TOKEN}\`,
+        'X-AI-Service-Key': AI_SERVICE_KEY
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching work:', error.message);
+    throw error;
+  }
+}
+
+module.exports = { fetchWorks, getWorkById };`,
+        },
+      },
+      { role: "user", content: "ありがとうございます！動作確認してみます。" },
+      {
+        role: "assistant",
+        content:
+          "どういたしまして！何かエラーが発生した場合や、追加の機能が必要な場合はお気軽にご質問ください。作品の検索機能やフィルタリング機能も追加できますので、必要であればお申し付けください。",
+      },
+    ],
   },
   {
-    timestamp: "2026-02-23 14:25:33",
-    level: "info",
-    message: "Cache refreshed: 142 entries",
+    id: "conv-004",
+    sessionId: "Qw2xL6pK",
+    timestamp: "2026-02-23 12:15:08",
+    title: "光の搬送の解説",
+    category: "user",
+    messages: [
+      {
+        role: "user",
+        content: "「光の搬送」という作品はどこで撮られたものですか？",
+      },
+      {
+        role: "assistant",
+        content:
+          "「光の搬送」は新木場の工場地帯で撮影されました。深夜の物流現場を捉えたインダストリアル作品で、人工的な照明に照らし出された無機質な構造物と、そこで働く人々の気配を冷たくも美しいトーンで表現しています。",
+      },
+      {
+        role: "user",
+        content: "なぜ工場を撮影しようと思ったのですか？",
+      },
+      {
+        role: "assistant",
+        content:
+          "工場は現代都市の生命線でありながら、多くの人が目にすることのない場所です。その「見えない存在」に光を当てたいという思いから、このシリーズが始まりました。絶え間なく動き続ける物流の流れは、都市の血液のようなものとして捉えています。",
+      },
+    ],
   },
   {
-    timestamp: "2026-02-23 14:20:00",
-    level: "error",
-    message: "Failed to fetch external API: timeout",
+    id: "conv-005",
+    sessionId: "Vb9sD4tY",
+    timestamp: "2026-02-23 13:28:55",
+    title: "雨の標本シリーズ",
+    category: "user",
+    messages: [
+      {
+        role: "user",
+        content: "「雨の標本」シリーズは何枚くらいあるんですか？",
+      },
+      {
+        role: "assistant",
+        content:
+          "「雨の標本」シリーズは現在公開されているものが1枚ですが、実際には12枚の作品で構成されています。それぞれ異なる場所、異なる雨の表情を捉えた作品群です。残りの作品は今後の展示会で公開予定です。",
+      },
+      { role: "user", content: "雨上がりの路上を撮影した理由はありますか？" },
+      {
+        role: "assistant",
+        content:
+          "雨上がりの路面は、都市の記憶が一時的に浮かび上がる瞬間だと考えています。濡れたアスファルトに反射するネオン、水滴の輝き——これらはすぐに消えてしまう儚い存在ですが、それを「標本」のように閉じ込めることで、都市の一瞬の表情を永遠に残したいと思いました。",
+      },
+    ],
   },
   {
-    timestamp: "2026-02-23 14:15:22",
-    level: "info",
-    message: "Backup completed successfully",
+    id: "conv-006",
+    sessionId: "Hf7cB3nM",
+    timestamp: "2026-02-23 11:52:18",
+    title: "新作の公開設定",
+    category: "admin",
+    messages: [
+      {
+        role: "user",
+        content:
+          "GK-027の作品を公開する準備をしたいのですが、公開日を3月1日に設定できますか？",
+      },
+      {
+        role: "assistant",
+        content:
+          "承知しました。GK-027の公開日を2026年3月1日に設定いたします。公開予定日時は以下の通りです：\n\n- 作品ID: GK-027\n- 公開日: 2026年3月1日 00:00 (JST)\n- ステータス: 予約公開\n\n現在は下書き状態ですが、指定日時に自動的に公開されます。変更が必要な場合はお知らせください。",
+      },
+      { role: "user", content: "ありがとう。他に公開待ちの作品はある？" },
+      {
+        role: "assistant",
+        content:
+          "確認いたしました。現在公開待ち状態の作品は、GK-027「夜明けの港」（2026/03/01 公開予定）のみです。他の下書き作品についても公開日を設定される場合は、お知らせください。",
+      },
+    ],
   },
 ];
 
@@ -84,6 +258,15 @@ function AIStudioContent() {
   const [selectedModel, setSelectedModel] = useState<string>("gk-assistant-v1");
   const [systemPrompt, setSystemPrompt] = useState(
     "あなたはGLASS KEY Photo Archiveの作品解説AIです。写真作品について丁寧に説明し、コンセプトや技法について質問に答えてください。",
+  );
+  const [conversationCategory, setConversationCategory] = useState<
+    "user" | "admin"
+  >("user");
+  const [selectedConversation, setSelectedConversation] =
+    useState<Conversation | null>(null);
+
+  const filteredConversations = MOCK_CONVERSATIONS.filter(
+    (conv) => conv.category === conversationCategory,
   );
 
   if (!isAdmin) {
@@ -196,15 +379,14 @@ function AIStudioContent() {
             </div>
 
             <div className="ai-studio-section">
-              <h2>最近のアクティビティ</h2>
+              <h2>最近の会話</h2>
               <div className="ai-studio-activity">
-                {MOCK_LOGS.slice(0, 3).map((log, index) => (
-                  <div
-                    key={index}
-                    className={`ai-studio-log-entry ${log.level}`}
-                  >
-                    <span className="ai-studio-log-time">{log.timestamp}</span>
-                    <span className="ai-studio-log-message">{log.message}</span>
+                {MOCK_CONVERSATIONS.slice(0, 3).map((conv) => (
+                  <div key={conv.id} className="ai-studio-log-entry info">
+                    <span className="ai-studio-log-time">{conv.timestamp}</span>
+                    <span className="ai-studio-log-message">
+                      {conv.title} (SID: {conv.sessionId})
+                    </span>
                   </div>
                 ))}
               </div>
@@ -253,22 +435,118 @@ function AIStudioContent() {
         {activeTab === "logs" && (
           <div className="ai-studio-logs">
             <div className="ai-studio-logs-header">
-              <h2>システムログ</h2>
+              <div className="ai-studio-log-tabs">
+                <button
+                  type="button"
+                  className={`ai-studio-log-tab${conversationCategory === "user" ? " active" : ""}`}
+                  onClick={() => {
+                    setConversationCategory("user");
+                    setSelectedConversation(null);
+                  }}
+                >
+                  ユーザー会話
+                </button>
+                <button
+                  type="button"
+                  className={`ai-studio-log-tab${conversationCategory === "admin" ? " active" : ""}`}
+                  onClick={() => {
+                    setConversationCategory("admin");
+                    setSelectedConversation(null);
+                  }}
+                >
+                  管理者会話
+                </button>
+              </div>
               <button type="button" className="btn-outline btn-small">
                 更新
               </button>
             </div>
-            <div className="ai-studio-log-list">
-              {MOCK_LOGS.map((log, index) => (
-                <div key={index} className={`ai-studio-log-entry ${log.level}`}>
-                  <span className={`ai-studio-log-level ${log.level}`}>
-                    {log.level.toUpperCase()}
-                  </span>
-                  <span className="ai-studio-log-time">{log.timestamp}</span>
-                  <span className="ai-studio-log-message">{log.message}</span>
+
+            {!selectedConversation && (
+              <div className="ai-studio-conversation-list">
+                {filteredConversations.map((conv) => (
+                  <div
+                    key={conv.id}
+                    className="ai-studio-conversation-item"
+                    onClick={() => setSelectedConversation(conv)}
+                  >
+                    <div className="ai-studio-conversation-header">
+                      <span className="ai-studio-conversation-title">
+                        {conv.title}
+                      </span>
+                      <span className="ai-studio-conversation-sid">
+                        SID: {conv.sessionId}
+                      </span>
+                    </div>
+                    <div className="ai-studio-conversation-meta">
+                      <span className="ai-studio-conversation-time">
+                        {conv.timestamp}
+                      </span>
+                      <span className="ai-studio-conversation-count">
+                        {conv.messages.length} メッセージ
+                      </span>
+                    </div>
+                    <p className="ai-studio-conversation-preview">
+                      {conv.messages[0].content.substring(0, 60)}...
+                    </p>
+                  </div>
+                ))}
+                {filteredConversations.length === 0 && (
+                  <p className="ai-studio-no-conversations">
+                    会話履歴がありません
+                  </p>
+                )}
+              </div>
+            )}
+
+            {selectedConversation && (
+              <div className="ai-studio-conversation-detail">
+                <div className="ai-studio-conversation-detail-header">
+                  <button
+                    type="button"
+                    className="ai-studio-back-button"
+                    onClick={() => setSelectedConversation(null)}
+                  >
+                    ← 一覧に戻る
+                  </button>
+                  <div className="ai-studio-conversation-info">
+                    <h3>{selectedConversation.title}</h3>
+                    <span>
+                      SID: {selectedConversation.sessionId} |{" "}
+                      {selectedConversation.timestamp}
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </div>
+                <div className="ai-studio-conversation-messages">
+                  {selectedConversation.messages.map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`ai-studio-message ai-studio-message-${msg.role}`}
+                    >
+                      <div className="ai-studio-message-role">
+                        {msg.role === "user" ? "ユーザー" : "AI"}
+                      </div>
+                      <div className="ai-studio-message-content">
+                        <pre>{msg.content}</pre>
+                        {msg.attachedFile && (
+                          <div className="ai-studio-attached-file">
+                            <div className="ai-studio-file-header">
+                              <span className="ai-studio-file-icon">📄</span>
+                              <span className="ai-studio-file-name">
+                                {msg.attachedFile.filename}
+                              </span>
+                            </div>
+                            <pre className="ai-studio-file-content">
+                              {msg.attachedFile.content}
+                            </pre>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

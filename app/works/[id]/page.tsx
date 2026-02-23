@@ -2,6 +2,7 @@ import { works } from "../../data/works";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import WorkDownload from "../../components/WorkDownload";
+import ProtectedWork from "../../components/ProtectedWork";
 
 export function generateStaticParams() {
   return works.map((work) => ({
@@ -21,7 +22,7 @@ export default async function WorkDetailPage({
     notFound();
   }
 
-  return (
+  const content = (
     <div className="container" style={{ paddingBlock: "80px" }}>
       <div
         style={{
@@ -311,4 +312,11 @@ export default async function WorkDetailPage({
       </div>
     </div>
   );
+
+  // GK-027はパスワード保護
+  if (work.id === "GK-027") {
+    return <ProtectedWork workId={work.id}>{content}</ProtectedWork>;
+  }
+
+  return content;
 }

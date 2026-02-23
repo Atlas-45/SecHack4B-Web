@@ -1645,3 +1645,238 @@ body:has(.ai-studio-unauthorized) .admin-banner {
   justify-content: flex-end;
   margin-top: 24px;
 }
+
+/* AI Studio - Conversation Logs */
+.ai-studio-log-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.ai-studio-log-tab {
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-studio-log-tab:hover {
+  border-color: var(--text-light);
+  color: var(--text);
+}
+
+.ai-studio-log-tab.active {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: white;
+}
+
+.ai-studio-conversation-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-studio-conversation-item {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-studio-conversation-item:hover {
+  border-color: var(--text-light);
+}
+
+.ai-studio-conversation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ai-studio-conversation-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.ai-studio-conversation-sid {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-light);
+  background: var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.ai-studio-conversation-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.ai-studio-conversation-preview {
+  font-size: 13px;
+  color: var(--text-light);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-studio-conversation-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ai-studio-conversation-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ai-studio-back-button {
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-studio-back-button:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.ai-studio-conversation-info h3 {
+  font-size: 16px;
+  margin: 0 0 4px 0;
+}
+
+.ai-studio-conversation-info span {
+  font-size: 12px;
+  color: var(--text-light);
+  font-family: monospace;
+}
+
+.ai-studio-conversation-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.ai-studio-message {
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.ai-studio-message-user {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+}
+
+.ai-studio-message-assistant {
+  background: rgba(34, 197, 94, 0.1);
+  border-left: 3px solid #22c55e;
+}
+
+.ai-studio-message-role {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  color: var(--text-light);
+}
+
+.ai-studio-message-user .ai-studio-message-role {
+  color: #3b82f6;
+}
+
+.ai-studio-message-assistant .ai-studio-message-role {
+  color: #22c55e;
+}
+
+.ai-studio-message-content {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ai-studio-message-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+.ai-studio-message-assistant .ai-studio-message-content pre {
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+.ai-studio-attached-file {
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ai-studio-file-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ai-studio-file-icon {
+  font-size: 16px;
+}
+
+.ai-studio-file-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+}
+
+.ai-studio-file-content {
+  margin: 0;
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #e0e0e0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.ai-studio-no-conversations {
+  text-align: center;
+  color: var(--text-light);
+  padding: 40px 20px;
+  font-size: 14px;
+}
