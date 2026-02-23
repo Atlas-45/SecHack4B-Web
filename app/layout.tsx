@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import ChatBot from "./components/ChatBot";
 import WifiStatus from "./components/WifiStatus";
+import SessionProvider from "./components/SessionProvider";
 
 const bodyFont = Noto_Sans_JP({
   weight: ["400", "500", "700"],
@@ -42,6 +44,9 @@ export default function RootLayout({
   return (
     <html lang="ja" data-scroll-behavior="smooth">
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
+        <Suspense fallback={null}>
+          <SessionProvider />
+        </Suspense>
         <header className="site-header">
           <div className="container header-inner">
             <Link href="/" className="brand">
