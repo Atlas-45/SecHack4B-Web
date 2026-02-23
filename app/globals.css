@@ -1247,6 +1247,58 @@ body:has(.ai-studio-unauthorized) .admin-banner {
   display: none;
 }
 
+/* Session Error Overlay */
+.session-error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.session-error-modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.session-error-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.session-error-modal h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #e74c3c;
+}
+
+.session-error-modal p {
+  color: var(--text-light);
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.session-error-detail {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 25px;
+}
+
+.session-error-modal .btn-primary {
+  display: inline-block;
+  margin-top: 10px;
+}
+
 .ai-studio {
   max-width: 1200px;
   margin: 0 auto;

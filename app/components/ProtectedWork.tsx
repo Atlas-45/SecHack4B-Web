@@ -102,7 +102,7 @@ export default function ProtectedWork({
 
         <form onSubmit={handleSubmit}>
           <input
-            type="password"
+            type="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="パスワードを入力"

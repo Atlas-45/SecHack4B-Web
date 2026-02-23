@@ -97,18 +97,6 @@ export const works = [
       "日没直後のマジックアワー、空が群青色に染まる短い時間。都市の灯りが灯り始めるその瞬間に、人々の表情に落ちる微かな陰影を捉えたポートレートシリーズ。",
   },
   {
-    title: "航路",
-    location: "芝浦",
-    year: "2024",
-    tag: "Series",
-    image:
-      "https://images.unsplash.com/photo-1542931287-023b922fa89b?q=80&w=1200&auto=format&fit=crop",
-    id: "GK-017",
-    description:
-      "運河を行き交う船の航跡と、水面に揺れるビル群の影。都市を流れる水路を「道」として捉え直し、水上からの視点で東京の風景を再構築したシリーズ。",
-    hidden: true,
-  },
-  {
     title: "夜明けの港",
     location: "横浜",
     year: "2025",
