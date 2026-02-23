@@ -153,6 +153,14 @@ img {
   background: var(--border);
 }
 
+.chatbot-button-admin {
+  box-shadow: 0 0 0 2px #dc2626;
+}
+
+.chatbot-button-admin:hover {
+  box-shadow: 0 0 0 2px #ef4444;
+}
+
 .chatbot-icon {
   color: var(--text-light);
   transition: color 0.3s ease;
@@ -228,6 +236,32 @@ img {
 .chatbot-close:hover {
   background: var(--border);
   color: var(--text);
+}
+
+.chatbot-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chatbot-studio-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.chatbot-studio-button:hover {
+  background: rgba(220, 38, 38, 0.2);
+  color: #ef4444;
 }
 
 .chatbot-messages {
@@ -1164,4 +1198,435 @@ img {
 .table-row h3 {
   font-size: 18px;
   margin-bottom: 5px;
+}
+
+/* Admin Banner */
+.admin-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.4);
+}
+
+.admin-banner-icon {
+  font-size: 16px;
+}
+
+body:has(.admin-banner) .site-header {
+  top: 42px;
+}
+
+body:has(.admin-banner) main {
+  padding-top: 42px;
+}
+
+/* AI Studio */
+.ai-studio {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.ai-studio-unauthorized {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.ai-studio-unauthorized-content {
+  text-align: center;
+}
+
+.ai-studio-unauthorized-content h1 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #dc2626;
+}
+
+.ai-studio-unauthorized-content p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.ai-studio-header {
+  margin-bottom: 32px;
+}
+
+.ai-studio-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ai-studio-title h1 {
+  font-size: 28px;
+  font-family: var(--font-serif), serif;
+  margin: 0;
+}
+
+.ai-studio-title svg {
+  color: #dc2626;
+}
+
+.ai-studio-badge {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.ai-studio-subtitle {
+  color: var(--text-light);
+  font-size: 14px;
+  margin: 0;
+}
+
+.ai-studio-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.ai-studio-tab {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--text-light);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.ai-studio-tab:hover {
+  color: var(--text);
+}
+
+.ai-studio-tab.active {
+  color: #dc2626;
+}
+
+.ai-studio-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #dc2626;
+}
+
+.ai-studio-content {
+  min-height: 400px;
+}
+
+/* AI Studio - Overview */
+.ai-studio-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.ai-studio-stat-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.ai-studio-stat-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.ai-studio-stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.ai-studio-stat-change {
+  font-size: 12px;
+}
+
+.ai-studio-stat-change.positive {
+  color: #22c55e;
+}
+
+.ai-studio-stat-change.negative {
+  color: #ef4444;
+}
+
+.ai-studio-stat-change.neutral {
+  color: var(--text-light);
+}
+
+.ai-studio-section {
+  margin-bottom: 24px;
+}
+
+.ai-studio-section h2 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--text-light);
+}
+
+.ai-studio-current-model {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.ai-studio-model-name {
+  font-weight: 600;
+}
+
+.ai-studio-status {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ai-studio-status.active {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.ai-studio-status.beta {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.ai-studio-status.deprecated {
+  background: rgba(156, 163, 175, 0.15);
+  color: #9ca3af;
+}
+
+/* AI Studio - Models */
+.ai-studio-models h2 {
+  font-size: 16px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.ai-studio-model-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-studio-model-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-studio-model-card:hover {
+  border-color: var(--text-light);
+}
+
+.ai-studio-model-card.selected {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.05);
+}
+
+.ai-studio-model-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ai-studio-model-desc {
+  font-size: 13px;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.ai-studio-model-selected {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #dc2626;
+}
+
+/* AI Studio - Logs */
+.ai-studio-logs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.ai-studio-logs-header h2 {
+  font-size: 16px;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.ai-studio-log-list {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ai-studio-log-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.ai-studio-log-entry:last-child {
+  border-bottom: none;
+}
+
+.ai-studio-log-level {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.ai-studio-log-level.info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.ai-studio-log-level.warn {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.ai-studio-log-level.error {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.ai-studio-log-time {
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.ai-studio-log-message {
+  color: var(--text);
+}
+
+.ai-studio-activity .ai-studio-log-entry {
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+/* AI Studio - Settings */
+.ai-studio-settings h2 {
+  font-size: 16px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.ai-studio-setting-group {
+  margin-bottom: 24px;
+}
+
+.ai-studio-setting-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.ai-studio-textarea {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: monospace;
+  font-size: 13px;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.ai-studio-textarea:focus {
+  outline: none;
+  border-color: #dc2626;
+}
+
+.ai-studio-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ai-studio-setting-row span {
+  font-size: 14px;
+}
+
+.ai-studio-input {
+  width: 100px;
+  padding: 8px 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+  text-align: right;
+}
+
+.ai-studio-input:focus {
+  outline: none;
+  border-color: #dc2626;
+}
+
+.ai-studio-setting-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
 }
