@@ -4,7 +4,7 @@ GK-025_fog-river.jpg
 GK-018_afternoon-void.jpg
 GK-021_borderline.jpg
 GK-012_rain-sample.jpg
-GK-019_light-cargo.jpg
+GK-020_light-cargo.jpg
 GK-009_old-district.jpg
 
 ※ダミーの画像リストです。実際の素材に合わせて更新してください。

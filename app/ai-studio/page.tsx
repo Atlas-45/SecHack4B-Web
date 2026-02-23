@@ -5,6 +5,15 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 const ADMIN_SESSION_ID = "Hf7cB3nM";
 
+// ユーザー用セッションID（管理者以外）
+const USER_SESSION_IDS = [
+  "xK9mPq2L",
+  "Tn4wR8yJ",
+  "Qw2xL6pK",
+  "Vb9sD4tY",
+  "PNtHwU37",
+];
+
 type Model = {
   id: string;
   name: string;
@@ -117,7 +126,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
       {
         role: "assistant",
         content:
-          "承知しました。GLASS KEY Photo Archive APIと連携するNode.jsのサンプルコードをお作りしました。\n\n📎 glasskey-api.js (1.2KB) [ダウンロード]",
+          "承知しました。GLASS KEY Photo Archive APIと連携するNode.jsのサンプルコードをお作りしました。以下のファイルをダウンロードしてご利用ください。",
         attachedFile: {
           filename: "glasskey-api.js",
           content: `const axios = require('axios');
@@ -254,6 +263,7 @@ function AIStudioContent() {
   const router = useRouter();
   const sessionId = searchParams.get("session");
   const isAdmin = sessionId === ADMIN_SESSION_ID;
+  const isUserSession = sessionId && USER_SESSION_IDS.includes(sessionId);
 
   const [activeTab, setActiveTab] = useState<
     "overview" | "models" | "logs" | "settings"
@@ -273,6 +283,29 @@ function AIStudioContent() {
   );
 
   if (!isAdmin) {
+    // ユーザー用セッションの場合はアクセス権不足エラー
+    if (isUserSession) {
+      return (
+        <main className="ai-studio-unauthorized">
+          <div className="ai-studio-unauthorized-content">
+            <h1>アクセス権が足りません</h1>
+            <p>このページにアクセスするには管理者権限が必要です。</p>
+            <p className="ai-studio-unauthorized-detail">
+              現在のセッション: {sessionId}
+            </p>
+            <button
+              type="button"
+              className="btn-outline"
+              onClick={() => router.push("/")}
+            >
+              ホームに戻る
+            </button>
+          </div>
+        </main>
+      );
+    }
+
+    // その他の場合（無効なセッション等）
     return (
       <main className="ai-studio-unauthorized">
         <div className="ai-studio-unauthorized-content">
@@ -538,10 +571,29 @@ function AIStudioContent() {
                               <span className="ai-studio-file-name">
                                 {msg.attachedFile.filename}
                               </span>
+                              <button
+                                type="button"
+                                className="ai-studio-file-download"
+                                onClick={() => {
+                                  if (msg.attachedFile) {
+                                    const blob = new Blob(
+                                      [msg.attachedFile.content],
+                                      { type: "text/plain;charset=utf-8" },
+                                    );
+                                    const url = URL.createObjectURL(blob);
+                                    const link = document.createElement("a");
+                                    link.href = url;
+                                    link.download = msg.attachedFile.filename;
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                    URL.revokeObjectURL(url);
+                                  }
+                                }}
+                              >
+                                ダウンロード
+                              </button>
                             </div>
-                            <pre className="ai-studio-file-content">
-                              {msg.attachedFile.content}
-                            </pre>
                           </div>
                         )}
                       </div>

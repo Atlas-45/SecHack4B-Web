@@ -44,13 +44,15 @@ export const works = [
       "雨上がりの路上に残された痕跡をクローズアップで撮影。濡れたアスファルト、反射するネオン、水滴の輝きが、都市の記憶を標本のように閉じ込めている。",
   },
   {
-    title: "██████",
-    location: "██████",
-    year: "████",
-    tag: "██████",
-    image: "/void.jpg",
-    id: "GK-000",
-    description: "データが破損しています。",
+    title: "消失点",
+    location: "新宿",
+    year: "2024",
+    tag: "Abstract",
+    image:
+      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1200&auto=format&fit=crop",
+    id: "GK-014",
+    description:
+      "都市の中心で捉えた、存在と不在の境界線。密度の高い建築群の間から覗く空虚な空間が、見えないものの存在を強く意識させる。消失点へと収束する視線の先に、何かが待っている。",
   },
   {
     title: "光の搬送",
@@ -59,7 +61,7 @@ export const works = [
     tag: "Industrial",
     image:
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
-    id: "GK-019",
+    id: "GK-020",
     description:
       "深夜の工場地帯、絶え間なく動き続ける物流の現場。人工的な照明に照らし出された無機質な構造物と、そこで働く人々の気配を、冷たくも美しいトーンで表現。",
   },
@@ -92,7 +94,7 @@ export const works = [
     tag: "Portrait",
     image:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
-    id: "GK-013",
+    id: "GK-015",
     description:
       "日没直後のマジックアワー、空が群青色に染まる短い時間。都市の灯りが灯り始めるその瞬間に、人々の表情に落ちる微かな陰影を捉えたポートレートシリーズ。",
   },

@@ -8,6 +8,8 @@ type WifiGateDownloadProps = {
   label?: string;
   className?: string;
   style?: React.CSSProperties;
+  requirePassword?: boolean;
+  password?: string;
 };
 
 const STORAGE_KEY = "wifi_gate_connected";
@@ -18,9 +20,14 @@ export default function WifiGateDownload({
   label = "Download ↓",
   className,
   style,
+  requirePassword = false,
+  password = "",
 }: WifiGateDownloadProps) {
   const [isConnected, setIsConnected] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
 
   const checkConnection = useCallback(() => {
     try {
@@ -62,6 +69,15 @@ export default function WifiGateDownload({
       return;
     }
 
+    // If password is required, show password modal first
+    if (requirePassword) {
+      event.preventDefault();
+      setShowPasswordModal(true);
+      setPasswordInput("");
+      setPasswordError(false);
+      return;
+    }
+
     // If connected and privateHref exists, use that instead
     if (privateHref) {
       event.preventDefault();
@@ -70,6 +86,26 @@ export default function WifiGateDownload({
       link.download = "";
       link.click();
     }
+  };
+
+  const handlePasswordSubmit = () => {
+    if (passwordInput === password) {
+      setShowPasswordModal(false);
+      setPasswordError(false);
+      // Download the file
+      const link = document.createElement("a");
+      link.href = privateHref || href;
+      link.download = "";
+      link.click();
+    } else {
+      setPasswordError(true);
+    }
+  };
+
+  const handleClosePasswordModal = () => {
+    setShowPasswordModal(false);
+    setPasswordInput("");
+    setPasswordError(false);
   };
 
   const handleCloseWarning = () => {
@@ -134,6 +170,95 @@ export default function WifiGateDownload({
             >
               閉じる
             </button>
+          </div>
+        </>
+      )}
+
+      {showPasswordModal && (
+        <>
+          <div
+            className="wifi-modal-backdrop"
+            onClick={handleClosePasswordModal}
+          />
+          <div className="wifi-warning-modal" role="dialog" aria-modal="true">
+            <div
+              className="wifi-warning-icon"
+              style={{ color: "var(--accent)" }}
+            >
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </div>
+            <h3 className="wifi-warning-title">パスワードが必要です</h3>
+            <p
+              className="wifi-warning-message"
+              style={{ marginBottom: "20px" }}
+            >
+              このファイルをダウンロードするにはパスワードを入力してください。
+            </p>
+            <input
+              type="password"
+              value={passwordInput}
+              onChange={(e) => {
+                setPasswordInput(e.target.value);
+                setPasswordError(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handlePasswordSubmit();
+                }
+              }}
+              placeholder="パスワード"
+              style={{
+                width: "100%",
+                padding: "12px 15px",
+                fontSize: "16px",
+                border: passwordError ? "2px solid #dc3545" : "1px solid #ddd",
+                borderRadius: "4px",
+                marginBottom: "10px",
+                outline: "none",
+              }}
+              autoFocus
+            />
+            {passwordError && (
+              <p
+                style={{
+                  color: "#dc3545",
+                  fontSize: "13px",
+                  marginBottom: "15px",
+                }}
+              >
+                パスワードが正しくありません
+              </p>
+            )}
+            <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
+              <button
+                type="button"
+                className="button"
+                onClick={handlePasswordSubmit}
+                style={{ flex: 1 }}
+              >
+                ダウンロード
+              </button>
+              <button
+                type="button"
+                className="button"
+                onClick={handleClosePasswordModal}
+                style={{ flex: 1, background: "#666" }}
+              >
+                キャンセル
+              </button>
+            </div>
           </div>
         </>
       )}

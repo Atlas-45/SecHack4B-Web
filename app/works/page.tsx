@@ -103,7 +103,15 @@ export default function WorksPage() {
             <div className="work-body">
               <span
                 className="work-cat"
-                style={{ fontSize: "11px", letterSpacing: "0.1em" }}
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "0.1em",
+                  ...(work.id === "GK-014" && {
+                    background: "#000",
+                    color: "#000",
+                    userSelect: "none",
+                  }),
+                }}
               >
                 {work.tag}
               </span>
@@ -115,7 +123,20 @@ export default function WorksPage() {
                   marginBottom: "15px",
                 }}
               >
-                {work.title}
+                {work.id === "GK-014" ? (
+                  <span
+                    style={{
+                      background: "#000",
+                      color: "#000",
+                      userSelect: "none",
+                      padding: "0 4px",
+                    }}
+                  >
+                    {work.title}
+                  </span>
+                ) : (
+                  work.title
+                )}
               </h3>
               <div
                 style={{
@@ -128,7 +149,22 @@ export default function WorksPage() {
                   className="work-meta"
                   style={{ fontSize: "12px", fontFamily: "monospace" }}
                 >
-                  {work.location} / {work.year}
+                  {work.id === "GK-014" ? (
+                    <span
+                      style={{
+                        background: "#000",
+                        color: "#000",
+                        userSelect: "none",
+                        padding: "0 4px",
+                      }}
+                    >
+                      {work.id} / {work.year}
+                    </span>
+                  ) : (
+                    <>
+                      {work.id} / {work.year}
+                    </>
+                  )}
                 </p>
                 <span style={{ fontSize: "12px", color: "var(--accent)" }}>
                   View Detail &rarr;
