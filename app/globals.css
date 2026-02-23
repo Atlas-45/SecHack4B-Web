@@ -248,8 +248,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  gap: 6px;
+  padding: 6px 12px;
   border: 1px solid #dc2626;
   border-radius: 6px;
   background: rgba(220, 38, 38, 0.1);
@@ -257,11 +257,15 @@ img {
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .chatbot-studio-button:hover {
   background: rgba(220, 38, 38, 0.2);
   color: #ef4444;
+  border-color: #ef4444;
 }
 
 .chatbot-messages {
@@ -1233,17 +1237,28 @@ body:has(.admin-banner) main {
 }
 
 /* AI Studio */
+body:has(.ai-studio) .site-header,
+body:has(.ai-studio-unauthorized) .site-header {
+  display: none;
+}
+
+body:has(.ai-studio) .admin-banner,
+body:has(.ai-studio-unauthorized) .admin-banner {
+  display: none;
+}
+
 .ai-studio {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  min-height: 100vh;
 }
 
 .ai-studio-unauthorized {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  min-height: 100vh;
 }
 
 .ai-studio-unauthorized-content {

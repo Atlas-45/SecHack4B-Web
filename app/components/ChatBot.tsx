@@ -279,11 +279,13 @@ export default function ChatBot() {
                   <Link
                     href={`/ai-studio?session=${ADMIN_SESSION_ID}`}
                     className="chatbot-studio-button"
-                    title="AI Studio"
+                    title="AI Studio を開く"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <svg
-                      width="18"
-                      height="18"
+                      width="16"
+                      height="16"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -294,6 +296,21 @@ export default function ChatBot() {
                       <rect x="3" y="3" width="18" height="18" rx="2" />
                       <path d="M3 9h18" />
                       <path d="M9 21V9" />
+                    </svg>
+                    <span>設定画面へ</span>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
                   </Link>
                 )}
