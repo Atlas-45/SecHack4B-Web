@@ -6,6 +6,7 @@ import "./globals.css";
 import ChatBot from "./components/ChatBot";
 import WifiStatus from "./components/WifiStatus";
 import SessionProvider from "./components/SessionProvider";
+import DevConsole from "./components/DevConsole";
 
 const bodyFont = Noto_Sans_JP({
   weight: ["400", "500", "700"],
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="ja" data-scroll-behavior="smooth">
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
+        <DevConsole />
         <Suspense fallback={null}>
           <SessionProvider />
         </Suspense>

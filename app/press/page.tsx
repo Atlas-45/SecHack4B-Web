@@ -167,9 +167,35 @@ export default function PressPage() {
                       fontSize: "22px",
                       marginBottom: "6px",
                       fontFamily: "var(--font-serif), serif",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
                     }}
                   >
                     {kit.title}
+                    {kit.id === "gamma" && (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ color: "var(--accent)" }}
+                      >
+                        <rect
+                          x="3"
+                          y="11"
+                          width="18"
+                          height="11"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                      </svg>
+                    )}
                   </h2>
                   <p style={{ fontSize: "14px", color: "var(--text-light)" }}>
                     {kit.desc}
@@ -245,7 +271,7 @@ export default function PressPage() {
                           : undefined
                       }
                       requirePassword={kit.id === "gamma"}
-                      password="GLASS2026"
+                      password="160"
                       label="Download ↓"
                       style={{
                         minWidth: "140px",
