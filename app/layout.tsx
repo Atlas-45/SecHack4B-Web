@@ -63,7 +63,9 @@ export default function RootLayout({
               ))}
             </nav>
           </div>
-          <ChatBot />
+          <Suspense fallback={null}>
+            <ChatBot />
+          </Suspense>
           <WifiStatus />
         </header>
 

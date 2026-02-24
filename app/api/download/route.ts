@@ -73,8 +73,10 @@ export async function GET(request: NextRequest) {
       .toBuffer();
 
     const filename = `${work.id}_${work.title.replace(/[^\w\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/g, "_")}.jpg`;
+    const responseBody = new ArrayBuffer(jpegBuffer.byteLength);
+    new Uint8Array(responseBody).set(jpegBuffer);
 
-    return new NextResponse(jpegBuffer, {
+    return new NextResponse(responseBody, {
       headers: {
         "Content-Type": "image/jpeg",
         "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(filename)}`,
