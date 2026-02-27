@@ -312,6 +312,18 @@ export default function ProtectedWork({
             >
               RECOVERY FAILED [0x027A]
             </p>
+            <p
+              style={{
+                marginTop: "14px",
+                marginBottom: 0,
+                fontFamily: "monospace",
+                color: "#ffd7d7",
+                fontSize: "14px",
+                letterSpacing: "0.08em",
+              }}
+            >
+              緯度+経度=?
+            </p>
           </div>
         ) : (
           <div
@@ -340,6 +352,17 @@ export default function ProtectedWork({
             </p>
             <p style={{ marginBottom: 0, color: "var(--text-light)" }}>
               GK-027 / 公開予定作品
+            </p>
+            <p
+              style={{
+                marginTop: "10px",
+                marginBottom: 0,
+                color: "var(--text-light)",
+                fontFamily: "monospace",
+                fontSize: "13px",
+              }}
+            >
+              緯度+経度=?
             </p>
           </div>
         )}
