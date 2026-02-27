@@ -32,6 +32,9 @@
 .DS_Store
 *.pem
 
+# internal docs (contains spoilers)
+/docs
+
 # debug
 npm-debug.log*
 yarn-debug.log*

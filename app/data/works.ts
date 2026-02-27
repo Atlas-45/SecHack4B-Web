@@ -99,15 +99,15 @@ export const works = [
       "日没直後のマジックアワー、空が群青色に染まる短い時間。都市の灯りが灯り始めるその瞬間に、人々の表情に落ちる微かな陰影を捉えたポートレートシリーズ。",
   },
   {
-    title: "夜明けの港",
+    title: "解錠前夜",
     location: "横浜",
     year: "2025",
     tag: "Monochrome",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1650969789459-20687412bf51?q=80&w=1200&auto=format&fit=crop",
     id: "GK-027",
     description:
-      "夜明け前の横浜港、静寂に包まれた埠頭を捉えた作品。闇から光へと移り変わる空のグラデーションと、それを映す水面の静謐な美しさ。都市が目覚める前の、最も静かで神聖な瞬間。",
+      "ドアハンドルに差し込む光をクローズアップで捉えた作品。金属の冷たい質感と手の気配が、閉ざされた境界がほどける瞬間を示す。静かな緊張の先で、ロック解除の“CLEAR”が点灯する。",
     hidden: true,
   },
 ];
