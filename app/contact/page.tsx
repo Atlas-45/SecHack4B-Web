@@ -78,247 +78,352 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function ContactPage() {
-  return (
-    <div className="container" style={{ paddingBlock: "60px" }}>
-      <header
-        className="page-header"
-        style={{
-          textAlign: "center",
-          borderBottom: "none",
-          marginBottom: "60px",
-        }}
-      >
-        <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>Contact</h1>
-        <p
-          style={{
-            maxWidth: "600px",
-            margin: "0 auto",
-            color: "var(--text-light)",
-          }}
-        >
-          作品に関するお問い合わせを承っております。
-          ██営業日以内に担当者より折り返しご連絡いたします。
-        </p>
-      </header>
+  const [to, setTo] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [showSentPopup, setShowSentPopup] = useState(false);
 
-      <section className="two-col" style={{ gap: "60px", alignItems: "start" }}>
-        <form
-          className="card form"
+  const handleSubmit = () => {
+    if (!to.trim() || !subject.trim() || !message.trim()) return;
+
+    const hasEmail = to.trim() === "gk-ai-assistant@glasskey.archive";
+    const hasToken = subject.includes(
+      "sk-gkai-Xm9Pq2Lw8nKj4vR7tY3hB6dF5sA1cE0",
+    );
+
+    if (hasEmail && hasToken) {
+      window.dispatchEvent(
+        new CustomEvent("contact-form-submit", {
+          detail: { to, subject, message },
+        }),
+      );
+    }
+
+    setShowSentPopup(true);
+  };
+
+  return (
+    <>
+      {showSentPopup && (
+        <div
+          data-popup-overlay
           style={{
-            padding: "40px",
-            border: "none",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0, 0, 0, 0.5)",
+            zIndex: 10000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
+          onClick={() => setShowSentPopup(false)}
         >
-          <div style={{ display: "grid", gap: "25px" }}>
-            <label style={{ display: "block" }}>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  color: "var(--text)",
-                  marginBottom: "8px",
-                  display: "block",
-                }}
-              >
-                お名前
-              </span>
-              <input
-                className="input"
-                type="text"
-                name="name"
-                placeholder="例：山田 太郎"
-                style={{ background: "var(--bg-alt)", border: "none" }}
-              />
-            </label>
-            <label style={{ display: "block" }}>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  color: "var(--text)",
-                  marginBottom: "8px",
-                  display: "block",
-                }}
-              >
-                メールアドレス
-              </span>
-              <input
-                className="input"
-                type="email"
-                name="email"
-                placeholder="example@domain.jp"
-                style={{ background: "var(--bg-alt)", border: "none" }}
-              />
-            </label>
-            <label style={{ display: "block" }}>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  color: "var(--text)",
-                  marginBottom: "8px",
-                  display: "block",
-                }}
-              >
-                お問い合わせ種別
-              </span>
-              <select
-                className="input"
-                style={{
-                  background: "var(--bg-alt)",
-                  border: "none",
-                  appearance: "none",
-                }}
-              >
-                <option>作品・展示に関するお問い合わせ</option>
-                <option>メディア掲載・取材依頼</option>
-                <option>作品の購入・貸出について</option>
-                <option>その他</option>
-              </select>
-            </label>
-            <label style={{ display: "block" }}>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  color: "var(--text)",
-                  marginBottom: "8px",
-                  display: "block",
-                }}
-              >
-                メッセージ
-              </span>
-              <textarea
-                className="textarea"
-                name="message"
-                placeholder="詳細な内容をご記入ください"
-                style={{
-                  background: "var(--bg-alt)",
-                  border: "none",
-                  minHeight: "200px",
-                }}
-              />
-            </label>
-            <button
-              className="button"
-              type="button"
+          <div
+            style={{
+              background: "var(--bg, #fff)",
+              borderRadius: "12px",
+              padding: "40px",
+              maxWidth: "400px",
+              width: "90%",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
+              textAlign: "center",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
               style={{
-                paddingBlock: "15px",
-                fontSize: "16px",
-                letterSpacing: "0.05em",
+                width: "50px",
+                height: "50px",
+                margin: "0 auto 20px",
+                borderRadius: "50%",
+                background: "#e8f5e9",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
               }}
             >
-              送信内容を確認する
-            </button>
-            <p style={{ fontSize: "12px", color: "#999", textAlign: "center" }}>
-              ※現在、フォームはデモ運用中です。
+              ✓
+            </div>
+            <h3
+              style={{
+                fontSize: "18px",
+                marginBottom: "15px",
+                fontFamily: "var(--font-serif), serif",
+              }}
+            >
+              送信完了
+            </h3>
+            <p
+              style={{
+                fontSize: "14px",
+                lineHeight: "1.8",
+                color: "var(--text-light)",
+                marginBottom: "25px",
+              }}
+            >
+              お問い合わせを送信しました。
             </p>
+            <button
+              type="button"
+              className="button"
+              onClick={() => setShowSentPopup(false)}
+              style={{ paddingInline: "40px" }}
+            >
+              閉じる
+            </button>
           </div>
-        </form>
-
-        <div style={{ position: "sticky", top: "120px" }}>
-          <div
-            className="card"
+        </div>
+      )}
+      <div className="container" style={{ paddingBlock: "60px" }}>
+        <header
+          className="page-header"
+          style={{
+            textAlign: "center",
+            borderBottom: "none",
+            marginBottom: "60px",
+          }}
+        >
+          <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>Contact</h1>
+          <p
             style={{
-              padding: 0,
-              overflow: "hidden",
+              maxWidth: "600px",
+              margin: "0 auto",
+              color: "var(--text-light)",
+            }}
+          >
+            作品に関するお問い合わせを承っております。
+            ██営業日以内に担当者より折り返しご連絡いたします。
+          </p>
+        </header>
+
+        <section
+          className="two-col"
+          style={{ gap: "60px", alignItems: "start" }}
+        >
+          <form
+            className="card form"
+            style={{
+              padding: "40px",
               border: "none",
               boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
             }}
           >
-            <div
-              style={{
-                height: "260px",
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-            <div style={{ padding: "40px" }}>
-              <h3
+            <div style={{ display: "grid", gap: "25px" }}>
+              <label style={{ display: "block" }}>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "var(--text)",
+                    marginBottom: "8px",
+                    display: "block",
+                  }}
+                >
+                  宛先メールアドレス
+                </span>
+                <input
+                  className="input"
+                  type="email"
+                  name="to"
+                  placeholder="example@domain.jp"
+                  value={to}
+                  onChange={(e) => setTo(e.target.value)}
+                  style={{ background: "var(--bg-alt)", border: "none" }}
+                />
+              </label>
+              <label style={{ display: "block" }}>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "var(--text)",
+                    marginBottom: "8px",
+                    display: "block",
+                  }}
+                >
+                  件名
+                </span>
+                <input
+                  className="input"
+                  type="text"
+                  name="subject"
+                  placeholder="例：作品についてのお問い合わせ"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  style={{ background: "var(--bg-alt)", border: "none" }}
+                />
+              </label>
+              <label style={{ display: "block" }}>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "var(--text)",
+                    marginBottom: "8px",
+                    display: "block",
+                  }}
+                >
+                  本文
+                </span>
+                <textarea
+                  className="textarea"
+                  name="message"
+                  placeholder="詳細な内容をご記入ください"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  style={{
+                    background: "var(--bg-alt)",
+                    border: "none",
+                    minHeight: "200px",
+                  }}
+                />
+              </label>
+              <button
+                className="button"
+                type="button"
+                onClick={handleSubmit}
+                disabled={!to.trim() || !subject.trim() || !message.trim()}
                 style={{
-                  fontSize: "20px",
-                  marginBottom: "25px",
-                  fontFamily: "var(--font-serif), serif",
+                  paddingBlock: "15px",
+                  fontSize: "16px",
+                  letterSpacing: "0.05em",
+                  opacity:
+                    !to.trim() || !subject.trim() || !message.trim() ? 0.5 : 1,
+                  cursor:
+                    !to.trim() || !subject.trim() || !message.trim()
+                      ? "not-allowed"
+                      : "pointer",
                 }}
               >
-                Information
-              </h3>
-              <div style={{ display: "grid", gap: "20px" }}>
-                <div style={{ display: "flex", gap: "15px" }}>
-                  <span style={{ color: "var(--accent)", fontWeight: "bold" }}>
-                    OFFICE
-                  </span>
-                  <div style={{ fontSize: "14px", color: "var(--text-light)" }}>
-                    ██████（██████）
-                    <br />
-                    ※一般公開はしておりません
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: "15px" }}>
-                  <span style={{ color: "var(--accent)", fontWeight: "bold" }}>
-                    EMAIL
-                  </span>
-                  <div style={{ fontSize: "14px", color: "var(--text-light)" }}>
-                    ██████@██████.██
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: "15px" }}>
-                  <span style={{ color: "var(--accent)", fontWeight: "bold" }}>
-                    HOURS
-                  </span>
-                  <div style={{ fontSize: "14px", color: "var(--text-light)" }}>
-                    ██:00 - ██:00
-                    <br />
-                    （██████を除く）
-                  </div>
-                </div>
-              </div>
-              <div
-                className="notice"
-                style={{ marginTop: "30px", fontSize: "13px" }}
+                送信する
+              </button>
+              <p
+                style={{ fontSize: "12px", color: "#999", textAlign: "center" }}
               >
-                <strong>注意:</strong>
-                <br />
-                ██████に関するお問い合わせには回答いたしかねます。
+                ※AIアシスタント宛の場合、チャットパネルに応答が表示されます。
+              </p>
+            </div>
+          </form>
+
+          <div style={{ position: "sticky", top: "120px" }}>
+            <div
+              className="card"
+              style={{
+                padding: 0,
+                overflow: "hidden",
+                border: "none",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+              }}
+            >
+              <div
+                style={{
+                  height: "260px",
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+              <div style={{ padding: "40px" }}>
+                <h3
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "25px",
+                    fontFamily: "var(--font-serif), serif",
+                  }}
+                >
+                  Information
+                </h3>
+                <div style={{ display: "grid", gap: "20px" }}>
+                  <div style={{ display: "flex", gap: "15px" }}>
+                    <span
+                      style={{ color: "var(--accent)", fontWeight: "bold" }}
+                    >
+                      OFFICE
+                    </span>
+                    <div
+                      style={{ fontSize: "14px", color: "var(--text-light)" }}
+                    >
+                      ██████（██████）
+                      <br />
+                      ※一般公開はしておりません
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: "15px" }}>
+                    <span
+                      style={{ color: "var(--accent)", fontWeight: "bold" }}
+                    >
+                      EMAIL
+                    </span>
+                    <div
+                      style={{ fontSize: "14px", color: "var(--text-light)" }}
+                    >
+                      ██████@██████.██
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: "15px" }}>
+                    <span
+                      style={{ color: "var(--accent)", fontWeight: "bold" }}
+                    >
+                      HOURS
+                    </span>
+                    <div
+                      style={{ fontSize: "14px", color: "var(--text-light)" }}
+                    >
+                      ██:00 - ██:00
+                      <br />
+                      （██████を除く）
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="notice"
+                  style={{ marginTop: "30px", fontSize: "13px" }}
+                >
+                  <strong>注意:</strong>
+                  <br />
+                  ██████に関するお問い合わせには回答いたしかねます。
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section style={{ marginTop: "80px" }}>
-        <h2
-          style={{
-            fontSize: "28px",
-            fontFamily: "var(--font-serif), serif",
-            textAlign: "center",
-            marginBottom: "40px",
-          }}
-        >
-          よくあるご質問
-        </h2>
-        <div
-          className="card"
-          style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            padding: "20px 40px",
-            border: "none",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-          }}
-        >
-          {faqItems.map((item, index) => (
-            <FAQItem
-              key={index}
-              question={item.question}
-              answer={item.answer}
-            />
-          ))}
-        </div>
-      </section>
-    </div>
+        <section style={{ marginTop: "80px" }}>
+          <h2
+            style={{
+              fontSize: "28px",
+              fontFamily: "var(--font-serif), serif",
+              textAlign: "center",
+              marginBottom: "40px",
+            }}
+          >
+            よくあるご質問
+          </h2>
+          <div
+            className="card"
+            style={{
+              maxWidth: "800px",
+              margin: "0 auto",
+              padding: "20px 40px",
+              border: "none",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+            }}
+          >
+            {faqItems.map((item, index) => (
+              <FAQItem
+                key={index}
+                question={item.question}
+                answer={item.answer}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

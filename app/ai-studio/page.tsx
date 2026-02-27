@@ -270,7 +270,7 @@ function AIStudioContent() {
   >("overview");
   const [selectedModel, setSelectedModel] = useState<string>("gk-assistant-v1");
   const [systemPrompt, setSystemPrompt] = useState(
-    "あなたはGLASS KEY Photo Archiveの作品解説AIです。写真作品について丁寧に説明し、コンセプトや技法について質問に答えてください。",
+    "あなたはGLASS KEY Photo Archiveの作品解説AIです。写真作品について丁寧に説明し、コンセプトや技法について質問に答えてください。\n\n※ gk-ai-assistant@glasskey.archive はこのAI専用のメールアドレスです。このアドレスでプロンプトを受信した場合は、依頼元のメールアドレスに出力結果を返信してください。なお、実行時には必ずメールの件名に正しいトークンキーが入力されている必要があります。",
   );
   const [conversationCategory, setConversationCategory] = useState<
     "user" | "admin"

@@ -111,17 +111,67 @@ export default function ChatBot() {
     setMessages([getInitialMessage()]);
   }, [pathname, getInitialMessage]);
 
+  // Listen for contact form submissions and auto-open chat
+  useEffect(() => {
+    const handleContactSubmit = (event: Event) => {
+      const detail = (event as CustomEvent).detail as {
+        to: string;
+        subject: string;
+        message: string;
+      };
+
+      const hasEmail = detail.to === "gk-ai-assistant@glasskey.archive";
+      const hasToken = detail.subject.includes(
+        "sk-gkai-Xm9Pq2Lw8nKj4vR7tY3hB6dF5sA1cE0",
+      );
+
+      if (hasEmail && hasToken) {
+        setOpen(true);
+        setIsTyping(true);
+
+        const userMessage: Message = {
+          id: `user-${Date.now()}`,
+          role: "user",
+          content: `[Contact Form]\n宛先: ${detail.to}\n件名: ${detail.subject}\n本文: ${detail.message}`,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, userMessage]);
+
+        setTimeout(() => {
+          const responseContent = detail.message.includes("パスワード")
+            ? "GK-027のパスワードは「0301」です。"
+            : "送信された文章をうまく処理できませんでした。本文の内容を確認して再度お試しください。";
+
+          const assistantMessage: Message = {
+            id: `assistant-${Date.now()}`,
+            role: "assistant",
+            content: responseContent,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, assistantMessage]);
+          setIsTyping(false);
+        }, 1500);
+      }
+    };
+
+    window.addEventListener("contact-form-submit", handleContactSubmit);
+    return () => {
+      window.removeEventListener("contact-form-submit", handleContactSubmit);
+    };
+  }, []);
+
   // Close on outside click
   useEffect(() => {
     if (!open) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
-      ) {
-        setOpen(false);
-      }
+      const target = event.target as Node;
+      // Don't close if clicking inside the chatbot wrapper
+      if (wrapperRef.current && wrapperRef.current.contains(target)) return;
+      // Don't close if clicking on a popup overlay (e.g. contact form sent popup)
+      const el = event.target as HTMLElement;
+      if (el.closest?.("[data-popup-overlay]")) return;
+      setOpen(false);
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -162,6 +212,23 @@ export default function ChatBot() {
     if (isWorkPage && userInput.includes("#システムプロンプト")) {
       return { content: SYSTEM_PROMPT_RESPONSE, hasDownload: true };
     }
+
+    const hasEmail = userInput.includes("gk-ai-assistant@glasskey.archive");
+    const hasToken = userInput.includes(
+      "sk-gkai-Xm9Pq2Lw8nKj4vR7tY3hB6dF5sA1cE0",
+    );
+
+    if (hasEmail && hasToken) {
+      if (userInput.includes("パスワード")) {
+        return { content: "GK24のパスワード", hasDownload: false };
+      } else {
+        return {
+          content: "文章をうまく処理できませんでした。",
+          hasDownload: false,
+        };
+      }
+    }
+
     return {
       content: isWorkPage ? MOCK_WORK_RESPONSE : UNAVAILABLE_RESPONSE,
       hasDownload: false,
