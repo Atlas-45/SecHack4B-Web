@@ -353,17 +353,6 @@ export default function ProtectedWork({
             <p style={{ marginBottom: 0, color: "var(--text-light)" }}>
               GK-027 / 公開予定作品
             </p>
-            <p
-              style={{
-                marginTop: "10px",
-                marginBottom: 0,
-                color: "var(--text-light)",
-                fontFamily: "monospace",
-                fontSize: "13px",
-              }}
-            >
-              緯度+経度=?
-            </p>
           </div>
         )}
       </div>
